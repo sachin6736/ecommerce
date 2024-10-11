@@ -1,0 +1,163 @@
+<%- include('header',{admin:admin}) %>
+
+
+  <style>
+
+#dashboard {
+    width: 100%;
+    padding: 20px;
+    background: transparent  white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.dashboard_container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction:column ;
+}
+
+.dashboard_title {
+   
+    margin-bottom: 20px;
+    color:#000000;
+    font-size: 30px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    flex: 1;
+    padding: 20px;
+    background-color: #a0a0a0c7;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    box-shadow: whitesmoke 0 0 9px 3px ;
+}
+
+.stat-box h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #000000;
+}
+
+.activities {
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.activities h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color:rgb(0, 0, 0)
+
+}
+
+.activity-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background:linear-gradient(rgba(117, 117, 117, 0.89),rgba(255, 255, 255, 0.829));
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.activity-item .timestamp {
+    color: #6c757d;
+    font-size: 12px;
+}
+
+.activity-item .action {
+    font-weight: bold;
+    color: #000000;
+}
+
+.activity-item .details {
+
+    color: #495057;
+}
+</style>
+
+
+
+
+<div id="dashboard">
+<h2 class="dashboard_title">Admin Dashboard </h2>
+<div class="stats">
+    <div class="stat-box" >
+        <h3>Total Products</h3>
+        <p><%=  products_count %></p>
+    </div>
+    <div class="stat-box" >
+        <h3>Total Orders</h3>
+        <p><%= orders_count %></p>
+    </div>
+    <div class="stat-box" >
+        <h3>Total Customers</h3>
+        <p><%= customers_count %></p>
+    </div>
+    <div class="stat-box" >
+        <h3>Total Revenue</h3>
+        <p>$50,000</p>
+    </div>
+   
+</div>
+<div id="growth-chart-container"  style="background-color: rgba(179, 179, 179, 0.774);">
+    <canvas id="growthChart"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 
+<script>
+      const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        const salesData = [150, 200, 250, 220, 300, 350, 400]; // Example data
+
+        // Assign a different color for each data point
+        const colors = [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(255, 99, 132, 1)'
+        ];
+
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        const growthChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Sales Growth',
+                    data: salesData,
+                    backgroundColor: colors, // Background color for the fill
+                    borderColor: colors, // Line color
+                    borderWidth: 2,
+                    fill: false,
+                    pointBackgroundColor: colors, // Colors for each point
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                }
+            }
+        });   </script>
+
+<%- include('footer') %>

@@ -1,0 +1,325 @@
+ <%- include('header',{admin:admin}) %>
+<style>
+        *{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+    .product_container {
+    width: 100%;
+    height: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product_title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+.btn-view-products {
+    width: 100px;
+    font-size: medium;
+    text-align: center;
+    background-color: #808080;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    /* padding: 10px 20px; */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-view-products:hover {
+    background-color: #4f4f50;
+    transform: scale(1.05);
+}
+
+.product-management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#products-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     height: 100%;
+     width: 100%;
+    gap: 10px;
+}
+
+#products-actions  button {
+    background-color: #808080;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#edit:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+#delete:hover {
+    background-color: #ad0303;
+    transform: scale(1.05);
+}
+
+.search-bar {
+    display: flex;
+}
+
+.search-bar input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-btn {
+    background-color: #808080;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.search-btn:hover {
+    background-color: #5a5a5a;
+}
+
+.table{
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: #ffff;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.table th{
+   padding: 10px;
+    text-align: centre;
+    border-bottom: 1px solid #ddd;
+    
+
+    
+}
+.table td {
+   padding: 30px;
+    text-align: centre;
+    border-bottom: 1px solid #ddd;
+}
+
+.table  th {
+    background: linear-gradient(135deg, #d3d3d3, #a9a9a9); /* Changed to lightgray and darkgray */
+    color: white;
+}
+
+.table  tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.view_and_btns {
+    width: 10%;
+    display: flex;
+    gap: 6px;
+}
+
+.Add_product
+{
+    width: 100px;
+    height: 50px;
+    background-color: #343a40;
+    border-style: none;
+    margin-top:10px ;
+    border-radius: 5px 5px 5px 5px ;
+    color: white;
+}
+.Add_product:hover{
+    background-color: #4f4f50;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.btn_addProduct
+{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.filter-form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.filter-form label {
+    margin-right: 10px;
+    color: #333;
+    font-weight: bold;
+}
+.filter-form select, .filter-form input {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #F9F9F9;
+}
+.filter-form input[type="date"] {
+    padding: 8px;
+}
+.filter-form button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #424745 0%, #a3a3a3 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.filter-form button:hover {
+    background-color: #161616;
+    transform: scale(1.05);
+}
+
+</style>
+
+<div class="product_container">
+    <div class="product_title">Manage Products</div>
+
+    <div class="product-management-header">
+      
+    </div>
+    <form class="filter-form" action="/filter_Admin_product" method="GET">
+        <label for="category">Category:</label>
+
+        <select id="category" name="categoryId">
+        <option value="all">All</option>
+
+            <%Categories.forEach(category => {  %>
+            <option value="<%= category._id %>" ><%= category.name %></option>
+                
+        <%    }); %>
+          
+            <!-- Add more categories as needed -->
+        </select>
+        <label for="availability">Availability:</label>
+        <select id="availability" name="availability">
+            <option value="all">All</option>
+            <option value="in-stock">In Stock</option>
+            <option value="out-of-stock">Out of Stock</option>
+        </select>
+        <label for="price-from">Price From:</label>
+        <input type="number" id="price-from" name="priceFrom" step="0.01">
+        <label for="price-to">Price To:</label>
+        <input type="number" id="price-to" name="priceTo" step="0.01">
+        <button type="submit"   onclick="filter_products(event)">Filter</button>
+    </form>
+    <div class="table-container">
+        
+        <!-- < class="btn-view-products">View Products</summary> -->
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product Id</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="productTableBody">
+                   <% Products.forEach(product => { %>
+                       <tr class="product-row">
+                            <td> <a href="/show_product_details/<%= product._id %>" >  <img src="/Product_images/<%= product.images[0]%>" alt="<%= product.name %>" style="max-width: 100px; max-height:100px ;">  </a></td> 
+                            <td><%= product._id %></td>   
+                            <td><%= product.name %></td>
+                            <td><%= product.price %></td>
+                            <td >
+                                <div id="products-actions">
+                                    <button onclick="window.location.href='/update_product/<%=product._id%>'" class="edit_product" id="edit" >Edit</button>
+                                    <button onclick ="delete_product( '<%= product._id %>',event)"  class="delete_product" id="delete">Delete</button>
+             
+                                </div>
+                     </td>
+                        </tr>
+                    
+                    <% }) %>
+              
+                <!-- More rows as needed -->
+            </tbody>
+        </table>
+    
+
+      <div class="btn_addProduct">  <a href="/Add_product"> <button class="Add_product">Add product</button></div></a>
+    </div>
+</div>
+
+<script>
+  
+
+
+
+   async function delete_product(product_id, event) {
+    event.preventDefault(); // Prevent the default form submission or link behavior if used in <a> tag
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+        if (result.isConfirmed) {      
+                const response = await fetch(`/delete_product/${product_id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    }).then(() => {
+                        //n
+                        location.reload(); // Reloads the page after successful deletion
+                    });
+                } 
+            
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<%- include('footer') %>
+
+
+
+

@@ -1,0 +1,202 @@
+<%- include('header') %>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css"/>
+
+<!-- 
+    RTL version
+-->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.rtl.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.rtl.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.rtl.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.rtl.min.css"/>
+
+
+<style>
+       *{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+}
+
+
+    .order_container {
+    width: 100%;
+    height: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order_title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: #ffff;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    text-align: centre;
+    border-bottom: 1px solid #ddd;
+    font-size: 12px;
+   
+}
+
+select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 14px;
+    }
+
+.table th {
+    background: linear-gradient(135deg, #d3d3d3, #a9a9a9);
+    color: rgb(0, 0, 0);
+
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+
+
+}
+
+.order-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.order-actions button {
+    background-color: #808080;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.order-actions button:hover {
+    background-color: #d16907;
+    transform: scale(1.05);
+}
+
+</style>
+<div class="order_container">
+    <h2 class="order_title">Order Management</h2>
+    
+    <div class="search-bar">
+       
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Purchase Date</th>
+                <th>Product Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+       <% Ordered_Products.forEach(item => { %>
+
+            <tr>
+                <td><%= item._id %></td>
+                <td><%=item.userId %></td>
+                <td><%= new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
+              <td><%=item.ordered_items.name %></td>
+                <td  > <%= item.status %></td>
+               
+                
+                <td>
+                    <div class="order-actions">
+                       <select class="confirm-button" name="status"  onchange="change_Order_status(this.value,'<%= item._id %>')">
+                         <option>Change Status</option>
+                        <option value="Order Confirmed" >Confirm Order</option>
+                       <option value="Shipped">Shipped</option>
+                       <option value="Out for Delivery">Out for Delivery</option>
+                       <option value="Delivered">Delivered</option>
+                       <option value="Cancelled">Cancelled</option>
+                    </select>
+                    </div>
+                </td>
+            </tr>
+	   <% }) %>
+
+          
+            <!-- Add more orders as needed -->
+        </tbody>
+    </table>
+</div>
+<script>
+ async function   change_Order_status(status,order_id){
+  req_body =JSON.stringify({status:status,order_Id:order_id})
+  console.log(req_body)
+
+  const response  =  await fetch('/order_status_change',{
+    method:'POST',
+    body:req_body,
+    headers:{"Content-Type":"application/json"}
+
+    })
+    if(response.ok){
+         alertify.success("success")
+         location.reload()
+    }
+    }
+</script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
+
+<%- include('footer') %>

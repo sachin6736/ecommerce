@@ -1,0 +1,73 @@
+<%- include('header',{admin:admin}) %>
+<style>
+    .profile_container
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    .profile-card {
+  background-color: #f8f8f8c9;
+  border-radius: 10px;
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
+  padding: 20px;
+  text-align: center;
+
+  width: 100%;
+}
+
+.profile-image {
+  margin-bottom: 20px;
+}
+
+.profile-image img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.profile-info h2 {
+  margin: 10px 0;
+  font-size: 2rem;
+}
+
+.profile-info p {
+  margin: 0;
+  color: #888;
+}
+
+.profile-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-info ul li {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.profile-info ul li i {
+  margin-right: 10px;
+  color: #4e54c8; /* Icon color */
+}
+</style>
+<div class="profile_container">
+    <div class="profile-card">
+        <div class="profile-image">
+          <img src="/img/admin_profile.jpg" alt="Admin Profile Picture">
+        </div>
+        <div class="profile-info">
+          <h2><%= admin.firstname %></h2>
+          <p>Admin Role</p>
+          <ul>
+            <li><i class="fas fa-envelope"></i><%= admin.email %></li>
+          </ul>
+        </div>
+      </div>
+
+
+</div>
+ <%- include('footer') %> 

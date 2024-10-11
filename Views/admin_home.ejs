@@ -1,0 +1,87 @@
+<%- include('header',{admin:admin}) %>
+
+<style>
+    .adminwelcome_container
+    {
+        display: flex;
+        flex-direction: column;
+
+    }
+            .welcome-message {
+            margin: 20px;
+        }
+        .welcome-message h1 {
+            font-size: 36px;
+            /* background:linear-gradient(rgba(117, 117, 117, 0.89),rgba(255, 255, 255, 0.829)); */
+            margin-bottom: 10px;
+            color: rgb(0, 0, 0);
+        }
+        .welcome-message p {
+            font-size: 18px;
+            /* background:linear-gradient(rgba(117, 117, 117, 0.89),rgba(255, 255, 255, 0.829)); */
+            color: rgb(10, 10, 10);
+
+            
+        }
+        .feature-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .feature-card {
+            background: #999284d8;
+            padding: 20px;
+            /* border-radius: 15px; */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            margin: 10px;
+            text-align: center;
+        }
+        .feature-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+.feature-cards :hover {
+ -webkit-transform: scale(1.2);
+  /* -ms-transform: scale(1.1); */
+  transform: scale(1.1);
+  
+  z-index: 1;
+        }
+    </style>
+</style>
+<div class="adminwelcome_container">
+<div class="welcome-message">
+    <h1>Welcome to the Admin Panel</h1>
+    <p><%= admin.firstname %> <%= admin.lastname  %></p>
+    <p>Manage your e-commerce platform efficiently and effectively.</p>
+</div>
+<div class="feature-cards">
+    <div class="feature-card">
+     <a href="/admin_page"> <h3>Dashboard</h3></a>  
+        <p>Overview of your site</p>
+    </div>
+    <div class="feature-card">
+        <a href="/customers">  <h3>Customers</h3></a>    
+        <p>Manage customer information</p>
+    </div>
+    <div class="feature-card">
+        <a href="/Products"> <h3>Products</h3></a>     
+        <p>Manage product listings</p>
+    </div>
+    <div class="feature-card">
+        <a href="/orders">  <h3>Orders</h3></a>   
+        <p>View and process orders</p>
+    </div>
+    
+</div>
+
+</div>
+<%- include('footer') %>

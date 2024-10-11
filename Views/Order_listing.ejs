@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Electro </title>
+
+	<!-- 
+    RTL version
+-->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.rtl.min.css" />
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.rtl.min.css" />
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.rtl.min.css" />
+	<!-- Bootstrap theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.rtl.min.css" />
+
+
+	<!-- /alertify -->
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="/home_css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="/home_css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="/home_css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="/home_css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/home_css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+	<link type="text/css" rel="stylesheet" href="/home_css/style.css" />
+	<link rel="stylesheet" href="/css/user_Acount.css">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+ 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+ 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+ 		<![endif]-->
+	<style>
+		
+.search-results {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.search-result-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-item .item-name {
+    font-weight: bold;
+}
+
+.search-result-item .item-category {
+    font-size: 12px;
+    color: #666;
+}
+
+		 .status-icon {
+            color: green;
+            margin-right: 8px; /* space between the icon and the text */
+        }
+		#address_not_found {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			margin-top: 50px;
+		}
+
+		.no-addresses {
+			font-size: 20px;
+			margin-top: 20px;
+
+
+		}
+
+		.add-address-btn {
+			margin-top: 20px;
+		}
+
+		#logout:hover {
+			color: blue;
+		}
+
+		.show_address {
+			width: 74%;
+			display: none;
+
+		}
+
+		.btn-primary {
+			background-color: #2874f0;
+			border: none;
+			margin-left: 50px;
+
+		}
+
+		.btn-primary:hover {
+			background-color: #1e5cbf;
+		}
+
+		.address-card h5 {
+			margin: 0 0 10px 0;
+		}
+
+		.address-card p {
+			margin: 0;
+		}
+
+		.address-card {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border: 1px solid #ddd;
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			margin-left: 50px;
+			position: relative;
+			/* This helps in positioning the actions absolutely */
+		}
+
+		.more_btn {
+			position: relative;
+			/* Helps in positioning the actions absolutely */
+			cursor: pointer;
+			/* Indicate that it's clickable */
+		}
+
+		.btn_actions {
+			display: none;
+			/* Hide by default */
+			position: absolute;
+			right: 10px;
+			top: 50%;
+			transform: translateY(-50%);
+			display: flex;
+			gap: 10px;
+		}
+
+		.more_btn:hover .btn_actions {
+			display: flex;
+			/* Show on hover */
+		}
+     
+        .order-listing {
+            margin-top: 2rem;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .order-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e9ecef;
+            padding: 1rem 0;
+        }
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        .order-item img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 8px;
+            margin-right: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .order-item .product-details {
+            flex: 1;
+        }
+        .order-item .product-details h5 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .order-item .product-details p {
+            margin: 0.25rem 0;
+            color: #6c757d;
+        }
+        .order-item .product-quantity {
+            color: #28a745;
+            font-weight: 500;
+        }
+        .order-item .product-price {
+            font-size: 1.25rem;
+            color: #dc3545;
+            font-weight: 600;
+        }
+        .total-summary {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .total-summary h4 {
+            margin: 0 0 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #343a40;
+        }
+        .total-summary p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .total-summary p:first-child {
+            margin-top: 0;
+        }
+        .order-item {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .order-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+	</style>
+</head>
+
+<body>
+	<!-- HEADER -->
+	<header>
+		<!-- TOP HEADER -->
+		<div id="top-header">
+			<div class="container">
+				
+				<ul class="header-links pull-right">
+
+					<% if (isAuth) { %>
+						<li><a href="/user_Account"><i class="fa fa-user-o"></i>
+								<%= USER.firstname%>
+							</a></li>
+						<a href="/logout_user">Logout</a>
+						<% }else {%>
+
+							<li><a href="/login"><i class="fa fa-user-o"></i> Login</a></li>
+
+							<% } %>
+
+				</ul>
+			</div>
+		</div>
+		<!-- /TOP HEADER -->
+
+		<!-- MAIN HEADER -->
+		<div id="header">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- LOGO -->
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="/home" class="logo">
+								<img src="./img/logo.png" alt="">
+							</a>
+						</div>
+					</div>
+					<!-- /LOGO -->
+
+					<!-- SEARCH BAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form style="display: flex;">
+								<input 
+									style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;border-top-right-radius: 50px;border-bottom-right-radius: 50px;width: 600px;" 
+									class="input" 
+									id="searchInput" 
+									name="query" 
+									placeholder="Search here...."
+									oninput="debouncedSearch()"
+								
+								>
+								
+							</form>
+							<div id="spinner" style="display: none;color: red;">
+								<i class="fas fa-spinner fa-spin"></i> Searching...
+							</div>
+							<div id="search-results" class="search-results" style="display: none;">
+								<!-- Search results will be injected here -->
+							</div>
+						</div>
+						
+					</div>
+					<!-- /SEARCH BAR -->
+
+					<!-- ACCOUNT -->
+					<div class="col-md-3 clearfix" ;">
+						<div class="header-ctn">
+							<!-- Wishlist -->
+							<%if(isAuth){%>
+
+								<div>
+									<a href="/wishlist">
+										<i class="fa fa-heart-o"></i>
+										<span>My Wishlist</span>
+										<div class="qty">
+											<%= wishlist_count %>
+										</div>
+									</a>
+								</div>
+								<!-- /Wishlist -->
+
+								<!-- Cart -->
+								<div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart"></i>
+										<span>My Cart</span>
+										<div class="qty">
+											<%= Item_Count %>
+										</div>
+									</a>
+									<div class="cart-dropdown">
+										<div class="cart-list">
+											<% Cart.forEach(cart=> { %>
+												<% Products.forEach(product=> { %>
+													<% cart.items.forEach(item=> { %>
+
+														<% if (item.product_Id.toString()===product._id.toString()) { %>
+															<div class="product-widget">
+																<div class="product-img">
+																	<img src="/Product_images/<%= product.images[0] %>"
+																		alt="">
+																</div>
+																<div class="product-body">
+																	<h3 class="product-name"><a href="#">
+																			<%= product.name %>
+																		</a></h3>
+																	<h4 class="product-price"><span class="qty">
+																			<%= item.Quantity %>
+																		</span><i class="fa fa-rupee"></i>
+																		<%= product.price %>
+																	</h4>
+																</div>
+																<button class="delete"><i
+																		class="fa fa-close"></i></button>
+															</div>
+
+															<% } %>
+
+																<% }) %>
+
+																	<% }) %>
+																		<% }) %>
+
+										</div>
+										<div class="cart-summary">
+											<small> Item(s) selected</small>
+											<h5>SUBTOTAL: <i class="fa fa-rupee"></i>
+												<%= TotalPrice %>
+											</h5>
+										</div>
+										<div class="cart-btns">
+											<a href="/cart">View Cart</a>
+											<a href="/checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
+								</div>
+								<% } else {%>
+									<div>
+										<a href="/login">
+											<i class="fa fa-heart-o"></i>
+											<span>My Wishlist</span>
+											<div class="qty">
+												<%= wishlist_count %>
+											</div>
+										</a>
+									</div>
+									<div class="dropdown">
+										<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="/login">
+											<i class="fa fa-shopping-cart"></i>
+											<span>Your Cart</span>
+											<div class="qty">0</div>
+										</a>
+										<!-- <div class="cart-dropdown">
+											<div class="cart-list">
+											</div>
+											<div class="cart-summary">
+												<small>Item(s) selected</small>
+												<h5>SUBTOTAL:<i class="fa fa-rupee"></i>
+												
+												</h5>
+											</div>
+											<div class="cart-btns">
+												<a href="#">View Cart</a>
+												<a href="/checkout">Checkout <i
+														class="fa fa-arrow-circle-right"></i></a>
+											</div> -->
+										</div>
+									</div>
+
+									<% } %>
+										<!-- /Cart -->
+
+										<!-- Menu Toogle -->
+										<div class="menu-toggle">
+											<a href="#">
+												<i class="fa fa-bars"></i>
+												<span>Menu</span>
+											</a>
+										</div>
+										<!-- /Menu Toogle -->
+						</div>
+					</div>
+					<!-- /ACCOUNT -->
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /MAIN HEADER -->
+	</header>
+	<!-- /HEADER -->
+
+
+
+	<!-- NAVIGATION -->
+	<nav id="navigation">
+		<!-- container -->
+		<div class="container">
+			<!-- responsive-nav -->
+			<div id="responsive-nav">
+				<!-- NAV -->
+				<ul class="main-nav nav navbar-nav">
+					<li class="active"><a href="/electro">Home</a></li>
+					<li id="new_products" ><a href="/new_products" >New Arrivals</a></li>
+					<% Categories.forEach(category=> { %>
+						<li><a  class="active" href="/store/<%= category._id %> ">
+								<%= category.name %>
+							</a></li>
+
+						<% }) %>
+
+				</ul>
+				<!-- /NAV -->
+			</div>
+			<!-- /responsive-nav -->
+		</div>
+		<!-- /container -->
+	</nav>
+	<!-- /NAVIGATION -->
+
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb" class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+
+	<!-- /BREADCRUMB -->
+    <div class="container order-listing">
+        <h1 class="my-4">Order Details</h1>
+    
+       <% Ordered_Products.forEach(item => { %>
+		<% pro_and_qty.forEach(i => { %>
+		 
+            <div class="order-item d-flex align-items-center"  onclick="Track_product('<%= item._id%>','<%=item.ordered_items._id %>','<%=item.Address_Id %>','<%=item.status %>')">
+
+                <img src="/Product_images/<%=item.ordered_items.images[0] %> " alt="<%=item.ordered_items.images[0] %> ">
+                <div class="product-details">
+                    <h5><%=item.ordered_items.name %>  <h5>
+		              
+
+						<p>   Your Order Placed on <%= new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+
+                 <% if (i.product_Id.toString() ===item.ordered_items._id.toString() ) { %>
+				  
+                    <p class="product-quantity">Quantity:<%= i.quantity %></p>
+					<% } %>
+
+                    <p class="product-price">Price: ₹ <%=item.ordered_items.price %> </p>
+                </div>
+				<div class="status">
+				<strong><%= item.status %></strong>
+				<i class="fas fa-check-circle status-icon"></i>
+
+				</div>
+
+            </div>
+		<% }) %>
+
+	   <% }) %>
+        
+       
+    </div>
+
+	<!-- SECTION -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /SECTION -->
+
+	<!-- NEWSLETTER -->
+
+	<!-- /NEWSLETTER -->
+
+	<!-- FOOTER -->
+	<footer id="footer">
+		<!-- top footer -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">About Us</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+								incididunt ut.</p>
+							<ul class="footer-links">
+								<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+								<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Categories</h3>
+							<ul class="footer-links">
+								<% Categories.forEach(category=> { %>
+									<li><a href="#">
+											<%=category.name %>
+										</a></li>
+
+									<% }) %>
+							</ul>
+						</div>
+					</div>
+
+					<div class="clearfix visible-xs"></div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Information</h3>
+							<ul class="footer-links">
+								<li><a href="#">About Us</a></li>
+								<li><a href="/contact_us">Contact Us</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="#">Orders and Returns</a></li>
+								<li><a href="#">Terms & Conditions</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Service</h3>
+							<ul class="footer-links">
+								<% if (isAuth) { %>
+									<li><a href="/user_Account"> My Account</a></li>
+									<% } %>
+										<li><a href="/cart">View Cart</a></li>
+										<li><a href="/wishlist">Wishlist</a></li>
+										<li><a href="#">Track My Order</a></li>
+										<li><a href="#">Help</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /top footer -->
+
+		<!-- bottom footer -->
+		<div id="bottom-footer" class="section">
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<ul class="footer-payments">
+							<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+							<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+						</ul>
+						<span class="copyright">
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>document.write(new Date().getFullYear());</script> All rights reserved | This
+							template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</span>
+
+
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /bottom footer -->
+	</footer>
+	<!-- /FOOTER -->
+
+<script>
+let debouncedtimer;
+function debouncedSearch()
+{
+clearTimeout(debouncedtimer)
+ debouncedtimer= setTimeout(() => {
+		search_it()
+	}, 300);
+}
+	
+async function search_it()
+{
+let input =	document.getElementById("searchInput").value
+let query = new URLSearchParams({query:input})
+let resultcontainer = document.getElementById("search-results")
+let Spinner = document.getElementById("spinner")
+
+if(input.trim()==="")
+{
+	resultcontainer.style.display ="none"
+	return;
+}
+Spinner.style.display="block"
+resultcontainer.style.display ="none"
+resultcontainer.innerHTML=""
+
+
+try{
+	let response = await fetch(`/search_product?${query}`,{
+		method:'GET'
+	})
+	console.log(response)
+	if(response.ok)
+	{
+		let data = await response.json()
+		if(data)
+	{
+		console.log(data)
+		show_products(data.Products)
+Spinner.style.display="none"
+
+   
+	}  else{
+		resultcontainer.innerHTML = "<p>No results found.</p>";
+		resultcontainer.style.display = "block";
+	}
+	}
+	else{
+		alert("false")
+	}
+}
+catch(error)
+{
+	console.log(error.message)
+}
+
+}
+
+function show_products(products) {
+    const resultsContainer = document.getElementById("search-results");
+
+    if (products.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found.</p>";
+    } else {
+        const list = document.createElement("ul");
+        list.style.listStyleType = "none";
+        list.style.padding = "0";
+
+        products.forEach(product => {
+            const listItem = document.createElement("li");
+            listItem.style.display = "flex";
+            listItem.style.alignItems = "center";
+            listItem.style.padding = "10px";
+            listItem.style.borderBottom = "1px solid #ddd";
+
+            const image = document.createElement("img");
+            image.src = `/Product_images/${product.images[0]}`;
+            image.style.width = "50px";
+            image.style.marginRight = "10px";
+            
+            const link = document.createElement("a");
+            link.href = `/product/${product._id}`;
+            link.textContent = product.name;
+            link.style.flex = "1";
+
+            listItem.appendChild(image);
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        });
+
+        resultsContainer.innerHTML = "";
+        resultsContainer.appendChild(list);
+    }
+
+    resultsContainer.style.display = "block";
+}
+
+
+	async function Track_product(order_id,pro_id,addrs_is,status){
+		console.log(order_id)
+		console.log("address-----------",pro_id)
+		let query =new URLSearchParams({Item_Id:pro_id,Address_id:addrs_is,order_Id:order_id,Status:status}).toString()
+		
+		     window.location.href=`/track_order?${query}`
+		
+	}
+</script>
+
+	
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!-- jQuery Plugins -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/slick.min.js"></script>
+	<script src="js/nouislider.min.js"></script>
+	<script src="js/jquery.zoom.min.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>

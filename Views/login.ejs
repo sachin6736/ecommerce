@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>Electro </title>
+
+ 		<!-- Google font -->
+ 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ 		<!-- Bootstrap -->
+ 		<link type="text/css" rel="stylesheet" href="/home_css/bootstrap.min.css"/>
+
+ 		<!-- Slick -->
+ 		<link type="text/css" rel="stylesheet" href="/home_css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="/home_css/slick-theme.css"/>
+
+ 		<!-- nouislider -->
+ 		<link type="text/css" rel="stylesheet" href="/home_css/nouislider.min.css"/>
+
+ 		<!-- Font Awesome Icon -->
+ 		<link rel="stylesheet" href="/home_css/font-awesome.min.css">
+
+ 		<!-- Custom stlylesheet -->
+ 		<link type="text/css" rel="stylesheet" href="/home_css/style.css"/>
+
+    <link rel="stylesheet" href="/css/login.css">
+
+ 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+ 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+ 		<!--[if lt IE 9]>
+ 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+ 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+ 		<![endif]-->
+		 <style>
+			.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Spin animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.search-results {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.search-result-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-item .item-name {
+    font-weight: bold;
+}
+
+.search-result-item .item-category {
+    font-size: 12px;
+    color: #666;
+}
+
+			#eye-icon-open {
+				   font-size: 15px;
+				   color: #000;
+				   display: none;
+			   }
+			   #eye-icon-open:hover{
+				   cursor: pointer;
+			   }
+			   #eye-icon-closed{
+				   font-size: 15px;
+				   color: #000;
+				   
+			   }
+			   #eye-icon-closed:hover{
+				   cursor: pointer;
+			   }
+			   #spinner{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				
+			   }
+			 
+
+		 </style>
+    </head>
+	<body>
+		<!-- HEADER -->
+		<div id="spinner" class="loader"></div>
+    <div >
+		<header>
+			<!-- TOP HEADER -->
+			<div id="top-header">
+				<div class="container">
+				
+					<ul class="header-links pull-right">
+						<li><a href="/login"><i class="fa fa-user-o"></i> Login</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /TOP HEADER -->
+
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="/electro" class="logo">
+									<img src="./img/logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
+
+						<!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form style="display: flex;">
+									<input 
+										style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;border-top-right-radius: 50px;border-bottom-right-radius: 50px;width: 600px;" 
+										class="input" 
+										id="searchInput" 
+										name="query" 
+										placeholder="Search here...."
+										oninput="debouncedSearch()"
+									
+									>
+									
+								</form>
+								<div id="spinner" style="display: none;">
+									<i class="fas fa-spinner fa-spin"></i> Searching...
+								</div>
+								<div id="search-results" class="search-results" style="display: none;">
+									<!-- Search results will be injected here -->
+								</div>
+							</div>
+							
+						</div>
+						<!-- /SEARCH BAR -->
+
+						<!-- ACCOUNT -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn">
+								<!-- Wishlist -->
+								<!-- <div>
+									<a href="#">
+										<i class="fa fa-heart-o"></i>
+										<span>Your Wishlist</span>
+										<div class="qty">0</div>
+									</a>
+								</div> -->
+								<!-- /Wishlist -->
+
+								<!-- Cart -->
+								<!-- <div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart"></i>
+										<span>Your Cart</span>
+										<div class="qty">0</div>
+									</a>
+									<div class="cart-dropdown">
+										<div class="cart-list">
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="./img/product01.png" alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
+
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="./img/product02.png" alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
+										</div>
+										<div class="cart-summary">
+											<small>3 Item(s) selected</small>
+											<h5>SUBTOTAL: $2940.00</h5>
+										</div>
+										<div class="cart-btns">
+											<a href="#">View Cart</a>
+											<a href="/checkout">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
+								</div> -->
+								<!-- /Cart -->
+
+								<!-- Menu Toogle -->
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="fa fa-bars"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								<!-- /Menu Toogle -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<!-- /HEADER -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li ><a href="/electro">Home</a></li>
+						<li id="new_products"  ><a href="/new_products" >New Arrivals</a></li>
+						<% Categories.forEach(category=> { %>
+							<li><a  class="active" href="/store/<%= category._id %> ">
+									<%= category.name %>
+								</a></li>
+	
+							<% }) %>
+	
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+	
+		<!-- NAVIGATION -->
+	
+		<!-- login section -->
+
+     
+    <div class="signin_container" id="mainbody"  >
+      <div class="form_container">
+        <div class="heading">Sign In</div>
+        <form action="/login" class="form" method="post">
+          <% if (errmsg) { %>
+            <small style="color: red; display: flex; justify-content: center;"><%= errmsg %></small>
+          <% } %>
+          <input class="input" type="text" name="email" id="email" placeholder="Enter email" value="abhinandappuabhinand@gmail.com">
+		 
+          <input class="input" type="password" name="password" id="password" placeholder="Password" value="Appu@2002"  >
+		  <i class=" fa fa-eye-slash" id="eye-icon-closed" style="margin-left: 300px;margin-top: -35px;"   onclick="toggle_passwordopen()"  ></i>  
+		  <i class="fa fa-eye "        id="eye-icon-open" style="margin-left: 300px;margin-top: -35px;display: none;"  onclick="toggle_passwordclosed()" ></i>    
+
+		 
+          <input class="login-button" type="submit" value="Sign In"  id="login_btn">
+        </form>
+        <span class="agreement">Don't have an account yet? <a href="/signup"  id >Create Account</a></button>
+      </div>
+  
+      
+  
+    </div> 
+
+		<!-- /login section -->
+
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- NEWSLETTER -->
+	
+		<!-- /NEWSLETTER -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			
+			<!-- /top footer -->
+
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<ul class="footer-payments">
+								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+							</ul>
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+
+
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+		<!-- /FOOTER -->
+		 </div>
+		 <script>
+			document.getElementById("login_btn").addEventListener("onclick",function(){
+				document.getElementById("main_body").style.display="none"
+			})
+let debouncedtimer;
+function debouncedSearch()
+{
+clearTimeout(debouncedtimer)
+ debouncedtimer= setTimeout(() => {
+		search_it()
+	}, 300);
+}
+	
+async function search_it()
+{
+let input =	document.getElementById("searchInput").value
+let query = new URLSearchParams({query:input})
+let resultcontainer = document.getElementById("search-results")
+let Spinner = document.getElementById("spinner")
+
+if(input.trim()==="")
+{
+	resultcontainer.style.display ="none"
+	return;
+}
+Spinner.style.display="block"
+resultcontainer.style.display ="none"
+resultcontainer.innerHTML=""
+
+
+try{
+	let response = await fetch(`/search_product?${query}`,{
+		method:'GET'
+	})
+	console.log(response)
+	if(response.ok)
+	{
+		let data = await response.json()
+		if(data)
+	{
+		console.log(data)
+		show_products(data.Products)
+Spinner.style.display="none"
+
+   
+	}  else{
+		resultcontainer.innerHTML = "<p>No results found.</p>";
+		resultcontainer.style.display = "block";
+	}
+	}
+	else{
+		alert("false")
+	}
+}
+catch(error)
+{
+	console.log(error.message)
+}
+
+}
+
+function show_products(products) {
+    const resultsContainer = document.getElementById("search-results");
+
+    if (products.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found.</p>";
+    } else {
+        const list = document.createElement("ul");
+        list.style.listStyleType = "none";
+        list.style.padding = "0";
+
+        products.forEach(product => {
+            const listItem = document.createElement("li");
+            listItem.style.display = "flex";
+            listItem.style.alignItems = "center";
+            listItem.style.padding = "10px";
+            listItem.style.borderBottom = "1px solid #ddd";
+
+            const image = document.createElement("img");
+            image.src = `/Product_images/${product.images[0]}`;
+            image.style.width = "50px";
+            image.style.marginRight = "10px";
+            
+            const link = document.createElement("a");
+            link.href = `/product/${product._id}`;
+            link.textContent = product.name;
+            link.style.flex = "1";
+
+            listItem.appendChild(image);
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        });
+
+        resultsContainer.innerHTML = "";
+        resultsContainer.appendChild(list);
+    }
+
+    resultsContainer.style.display = "block";
+}
+
+
+
+let show_pswd = document.getElementById('password')
+
+function toggle_passwordopen(){
+	if(  document.getElementById('eye-icon-open').style.display === "none")
+{ 
+	document.getElementById('eye-icon-open').style.display="inline-block"
+	document.getElementById('eye-icon-closed').style.display="none"
+	console.log(show_pswd)
+	if(show_pswd.type === "password")
+{
+	show_pswd.type = "text"
+}
+
+
+}
+	 
+}
+function toggle_passwordclosed(){
+	if(  document.getElementById('eye-icon-closed').style.display === "none")
+{
+	document.getElementById('eye-icon-open').style.display="none"
+	 document.getElementById('eye-icon-closed').style.display="inline-block"
+	 if(show_pswd.type === "text")
+{
+	show_pswd.type = "password"
+}
+
+}
+}
+
+
+		 </script>
+
+		<!-- jQuery Plugins -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/slick.min.js"></script>
+		<script src="js/nouislider.min.js"></script>
+		<script src="js/jquery.zoom.min.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="/path/to/your/styles.css"> <!-- Adjust path to your CSS file -->
+    <style>
+        .error-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .error-box {
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        .error-box h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #dc3545;
+        }
+        .error-box p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .error-box a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .error-box a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-box">
+            <h1><%= errorCode %> - <%= errorMessage %></h1>
+            <p><%= errorDetails %></p>
+            <p><a href="/">Go back to Home</a></p>
+        </div>
+    </div>
+</body>
+</html>

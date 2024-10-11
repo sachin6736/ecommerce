@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Electro </title>
+
+	<!-- 
+    RTL version
+-->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.rtl.min.css" />
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.rtl.min.css" />
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.rtl.min.css" />
+	<!-- Bootstrap theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.rtl.min.css" />
+
+
+	<!-- /alertify -->
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="/home_css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="/home_css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="/home_css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="/home_css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/home_css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+	<link type="text/css" rel="stylesheet" href="/home_css/style.css" />
+	<link rel="stylesheet" href="/css/user_Acount.css">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+ 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+ 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+ 		<![endif]-->
+	<style>
+		#address_not_found {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			margin-top: 50px;
+		}
+
+		.no-addresses {
+			font-size: 20px;
+			margin-top: 20px;
+
+
+		}
+
+		.add-address-btn {
+			margin-top: 20px;
+		}
+
+		#logout:hover {
+			color: blue;
+		}
+
+		.show_address {
+			width: 74%;
+			display: none;
+
+		}
+
+		.btn-primary {
+			background-color: #2874f0;
+			border: none;
+			margin-left: 50px;
+
+		}
+
+		.btn-primary:hover {
+			background-color: #1e5cbf;
+		}
+
+		.address-card h5 {
+			margin: 0 0 10px 0;
+		}
+
+		.address-card p {
+			margin: 0;
+		}
+
+		.address-card {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border: 1px solid #ddd;
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			margin-left: 50px;
+			position: relative;
+			/* This helps in positioning the actions absolutely */
+		}
+
+		.more_btn {
+			position: relative;
+			/* Helps in positioning the actions absolutely */
+			cursor: pointer;
+			/* Indicate that it's clickable */
+		}
+
+		.btn_actions {
+			display: none;
+			/* Hide by default */
+			position: absolute;
+			right: 10px;
+			top: 50%;
+			transform: translateY(-50%);
+			display: flex;
+			gap: 10px;
+		}
+
+		.more_btn:hover .btn_actions {
+			display: flex;
+			/* Show on hover */
+		}
+		
+.search-results {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.search-result-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-item .item-name {
+    font-weight: bold;
+}
+
+.search-result-item .item-category {
+    font-size: 12px;
+    color: #666;
+}
+
+	</style>
+</head>
+
+<body>
+	<!-- HEADER -->
+	<header>
+		<!-- TOP HEADER -->
+		<div id="top-header">
+			<div class="container">
+				
+				<ul class="header-links pull-right">
+
+					<% if (isAuth) { %>
+						<li><a href="/user_Account"><i class="fa fa-user-o"></i>
+								<%= USER.firstname%>
+							</a></li>
+						<a href="/logout_user">Logout</a>
+						<% }else {%>
+
+							<li><a href="/login"><i class="fa fa-user-o"></i> Login</a></li>
+
+							<% } %>
+
+				</ul>
+			</div>
+		</div>
+		<!-- /TOP HEADER -->
+
+		<!-- MAIN HEADER -->
+		<div id="header">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- LOGO -->
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="/electro" class="logo">
+								<img src="/img/logo.png" alt="">
+							</a>
+						</div>
+					</div>
+					<!-- /LOGO -->
+
+					<!-- SEARCH BAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form style="display: flex;">
+								<input 
+									style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;border-top-right-radius: 50px;border-bottom-right-radius: 50px;width: 600px;" 
+									class="input" 
+									id="searchInput" 
+									name="query" 
+									placeholder="Search here...."
+									oninput="debouncedSearch()"
+								
+								>
+								
+							</form>
+							<div id="spinner" style="display: none;color: red;">
+								<i class="fas fa-spinner fa-spin"></i> Searching...
+							</div>
+							<div id="search-results" class="search-results" style="display: none;">
+								<!-- Search results will be injected here -->
+							</div>
+						</div>
+						
+					</div>
+					<!-- /SEARCH BAR -->
+
+					<!-- ACCOUNT -->
+					<div class="col-md-3 clearfix" ;">
+						<div class="header-ctn">
+							<!-- Wishlist -->
+							<%if(isAuth){%>
+
+								<div>
+									<a href="/wishlist">
+										<i class="fa fa-heart-o"></i>
+										<span>My Wishlist</span>
+										<div class="qty">
+											<%= wishlist_count %>
+										</div>
+									</a>
+								</div>
+								<!-- /Wishlist -->
+
+								<!-- Cart -->
+								<div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart"></i>
+										<span>My Cart</span>
+										<div class="qty">
+											<%= Item_Count %>
+										</div>
+									</a>
+									<div class="cart-dropdown">
+										<div class="cart-list">
+											<% Cart.forEach(cart=> { %>
+												<% Products.forEach(product=> { %>
+													<% cart.items.forEach(item=> { %>
+
+														<% if (item.product_Id.toString()===product._id.toString()) { %>
+															<div class="product-widget">
+																<div class="product-img">
+																	<img src="/Product_images/<%= product.images[0] %>"
+																		alt="">
+																</div>
+																<div class="product-body">
+																	<h3 class="product-name"><a href="#">
+																			<%= product.name %>
+																		</a></h3>
+																	<h4 class="product-price"><span class="qty">
+																			<%= item.Quantity %>
+																		</span><i class="fa fa-rupee"></i>
+																		<%= product.price %>
+																	</h4>
+																</div>
+																<button class="delete"><i
+																		class="fa fa-close"></i></button>
+															</div>
+
+															<% } %>
+
+																<% }) %>
+
+																	<% }) %>
+																		<% }) %>
+
+										</div>
+										<div class="cart-summary">
+											<small> Item(s) selected</small>
+											<h5>SUBTOTAL: <i class="fa fa-rupee"></i>
+												<%= TotalPrice %>
+											</h5>
+										</div>
+										<div class="cart-btns">
+											<a href="/cart">View Cart</a>
+											<a href="/checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
+								</div>
+								<% } else {%>
+									<div>
+										<a href="/login">
+											<i class="fa fa-heart-o"></i>
+											<span>My Wishlist</span>
+											<div class="qty">
+												<%= wishlist_count %>
+											</div>
+										</a>
+									</div>
+									<div class="dropdown">
+										<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="/login">
+											<i class="fa fa-shopping-cart"></i>
+											<span>Your Cart</span>
+											<div class="qty">0</div>
+										</a>
+										<!-- <div class="cart-dropdown">
+											<div class="cart-list">
+											</div>
+											<div class="cart-summary">
+												<small>Item(s) selected</small>
+												<h5>SUBTOTAL:<i class="fa fa-rupee"></i>
+												
+												</h5>
+											</div>
+											<div class="cart-btns">
+												<a href="#">View Cart</a>
+												<a href="/checkout">Checkout <i
+														class="fa fa-arrow-circle-right"></i></a>
+											</div> -->
+										</div>
+									</div>
+
+									<% } %>
+										<!-- /Cart -->
+
+										<!-- Menu Toogle -->
+										<div class="menu-toggle">
+											<a href="#">
+												<i class="fa fa-bars"></i>
+												<span>Menu</span>
+											</a>
+										</div>
+										<!-- /Menu Toogle -->
+						</div>
+					</div>
+					<!-- /ACCOUNT -->
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /MAIN HEADER -->
+	</header>
+	<!-- /HEADER -->
+
+
+
+	<!-- NAVIGATION -->
+	<nav id="navigation">
+		<!-- container -->
+		<div class="container">
+			<!-- responsive-nav -->
+			<div id="responsive-nav">
+				<!-- NAV -->
+				<ul class="main-nav nav navbar-nav">
+					<li class="active"><a href="/electro">Home</a></li>
+					<li id="new_products" ><a href="/new_products" >New Arrivals</a></li>
+					<% Categories.forEach(category=> { %>
+						<li><a  class="active" href="/store/<%= category._id %> ">
+								<%= category.name %>
+							</a></li>
+
+						<% }) %>
+
+				</ul>
+				<!-- /NAV -->
+			</div>
+			<!-- /responsive-nav -->
+		</div>
+		<!-- /container -->
+	</nav>
+	<!-- /NAVIGATION -->
+
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb" class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+
+	<!-- /BREADCRUMB -->
+	<div class="container user-account-container">
+		<aside class="sidebar user-account-sidebar">
+			<div class="user-info">
+				<span class="fa fa-user-circle profile-icon"></span>
+				<p class="username">
+					<%= USER.firstname %>
+				</p>
+			</div>
+			<nav class="sidebar-nav">
+				<ul>
+					<li><a href="/list_ordered_products">MY ORDERS</a></li>
+					<li><a href="#" class="active">ACCOUNT SETTINGS</a>
+						<ul class="sub-nav">
+							<li><a href="/user_Account">Profile Information</a></li>
+							<li><a onclick="manage_address('<%=USER._id%>')">Manage Addresses</a></li>
+						</ul>
+					</li>
+					<ul class="sub-nav">
+						<li><a href="/wishlist">My Wishlist</a></li>
+						<li><a href="/cart">My Cart</a></li>
+						<li style="display: flex;align-items: baseline;"><a href="/logout_user"><i
+									class="fas fa-power-off"></i> Logout</a></li>
+					</ul>
+				</ul>
+			</nav>
+		</aside>
+
+		<main class="content user-account-content" id="profie">
+			<h1>Profile Information</h1>
+
+			<form id="profile-form">
+				<div class="form-group">
+					<label for="firstname">First Name</label>
+					<input type="text" id="firstname" name="firstname" value="<%= USER.firstname %>" required>
+				</div>
+				<div class="form-group">
+					<label for="lastname">Last Name</label>
+					<input type="text" id="lastname" name="lastname" value="<%= USER.lastname %>" required>
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" value="<%= USER.email %>" required>
+				</div>
+				<div class="form-group">
+					<label for="phone">Phone Number</label>
+					<input type="tel" id="phone" name="phone" value="<%= USER.Phone_Number %>" required>
+				</div>
+				<button type="submit" class="btn btn-primary" onclick="update_user_info('<%=USER._id%>')">Save
+					Changes</button>
+			</form>
+		</main>
+
+		<div class="content user-account-content" id="address_not_found" style="display: none;">
+			<h1>Manage Addresses</h1>
+			<div class="no-address-container" style="display:grid;">
+				<h3>No Addresses found in your account!</h3>
+				<p class="no-addresses">Add a delivery address.</p>
+				<img src="/address_not_found.jpg" alt="No Addresses" class="img-fluid" ">
+				<button class=" btn btn-primary add-address-btn" onclick="add_new_address()">ADD ADDRESSES</button>
+			</div>
+		</div>
+
+		<!-- addresss  container  -->
+		<div class="container mt-5" style="display: none;" id="new_address">
+			<h2>Add New Address</h2>
+			<form id="addressForm">
+
+
+				<div class="form-group">
+					<label for="house_name">House Name/Flat No</label>
+					<input type="text" class="form-control" name="house_name" id="house_name"
+						placeholder="House Name/Flat No" required value="">
+				</div>
+				<div class="form-group">
+					<label for="street">Street</label>
+					<input type="text" class="form-control" name="street" id="street" placeholder="Street" required
+						value="">
+				</div>
+				<div class="form-group">
+					<label for="Area">Area/locality</label>
+					<input type="text" class="form-control" name="Area" id="Area" placeholder="Area" required value="">
+				</div>
+				<div class="form-group">
+					<label for="pincode">Pincode</label>
+					<input type="text" class="form-control" name="pincode" id="pincode" rows="3" placeholder="pincode"
+						required value="">
+				</div>
+				<div class="form-group">
+					<label for="landmark">Landmark (Optional)</label>
+					<input type="text" class="form-control" name="landmark" id="landmark"
+						placeholder="Landmark (Optional)" value="">
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="city">City/District/Town</label>
+						<input type="text" class="form-control" name="city" id="city" placeholder="City/District/Town"
+							required value="">
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="state">State</label>
+						<input type="text" class="form-control" name="state" id="state" placeholder="state" required
+							value="">
+
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Address Type</label>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="addressType" id="addressType" value="Home"
+							checked>
+						<label class="form-check-label" for="home">Home</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="addressType" id="work" value="Work">
+						<label class="form-check-label" for="work">Work</label>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary" id="Add_Address"  onclick="upload_address()">Save
+					Address</button>
+				<button type="submit" class="btn btn-primary" id="address_btn_edit" style="display: none;">update
+					address</button>
+			</form>
+		</div>
+
+		<div class="show_address" id="User_Address">
+
+			<button class="btn btn-primary add-address-btn" onclick="add_new_address()">+ ADD A NEW ADDRESS</button>
+
+		<% if (user_address && user_address.Addresses && user_address.Addresses.length > 0) { %>
+			<% user_address.Addresses.forEach(address => { %> 
+			 
+			<div class="address-card">
+				<div style="display: flex; flex-direction: column;">
+					<h5>
+						<%=USER.firstname %>
+							<%= USER.lastname%>
+					</h5>
+					<p>
+						<%=USER.Phone_Number%>
+					</p>
+					<p>,<%= address.house_name %>
+							<%= address.street %>
+								<%= address.area %>
+									<%= address.pincode %>,<%= address.district %>,<%= address.state %>
+					</p>
+				</div>
+				<span class="more_btn"><i class="fa fa-ellipsis-v"></i></span>
+				<div class="btn_actions">
+					<button class="btn btn-secondary"
+						onclick="showEditAddressForm('<%=address._id %>','<%= address.house_name %>','<%= address.street %>','<%= address.area %>','<%= address.pincode %>','<%= address.district %>','<%= address.state %>','<%= address.landmark %>','<%= address.address_type %>')">
+						<i class="fas fa-edit"></i> Edit
+						<button class="btn btn-danger" onclick="deleteAddress('<%=address._id %>','<%= address.house_name %>','<%= address.street %>','<%= address.area %>','<%= address.pincode %>','<%= address.district %>','<%= address.state %>','<%= address.landmark %>','<%= address.address_type %>')">
+							<i class="fas fa-trash-alt"></i> Delete
+						</button>
+				</div>
+			</div>
+			<% }) %>
+			<% } %>
+
+		</div>
+	</div>
+
+	<!-- SECTION -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /SECTION -->
+
+	<!-- NEWSLETTER -->
+
+	<!-- /NEWSLETTER -->
+
+	<!-- FOOTER -->
+	<footer id="footer">
+		<!-- top footer -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">About Us</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+								incididunt ut.</p>
+							<ul class="footer-links">
+								<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+								<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Categories</h3>
+							<ul class="footer-links">
+								<% Categories.forEach(category=> { %>
+									<li><a href="#">
+											<%=category.name %>
+										</a></li>
+
+									<% }) %>
+							</ul>
+						</div>
+					</div>
+
+					<div class="clearfix visible-xs"></div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Information</h3>
+							<ul class="footer-links">
+								<li><a href="#">About Us</a></li>
+								<li><a href="/contact_us">Contact Us</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="#">Orders and Returns</a></li>
+								<li><a href="#">Terms & Conditions</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Service</h3>
+							<ul class="footer-links">
+								<% if (isAuth) { %>
+									<li><a href="/user_Account"> My Account</a></li>
+									<% } %>
+										<li><a href="/cart">View Cart</a></li>
+										<li><a href="/wishlist">Wishlist</a></li>
+										<li><a href="#">Track My Order</a></li>
+										<li><a href="#">Help</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /top footer -->
+
+		<!-- bottom footer -->
+		<div id="bottom-footer" class="section">
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<ul class="footer-payments">
+							<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+							<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+						</ul>
+						<span class="copyright">
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>document.write(new Date().getFullYear());</script> All rights reserved | This
+							template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</span>
+
+
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /bottom footer -->
+	</footer>
+	<!-- /FOOTER -->
+	<script>
+let debouncedtimer;
+function debouncedSearch()
+{
+clearTimeout(debouncedtimer)
+ debouncedtimer= setTimeout(() => {
+		search_it()
+	}, 300);
+}
+	
+async function search_it()
+{
+let input =	document.getElementById("searchInput").value
+let query = new URLSearchParams({query:input})
+let resultcontainer = document.getElementById("search-results")
+let Spinner = document.getElementById("spinner")
+
+if(input.trim()==="")
+{
+	resultcontainer.style.display ="none"
+	return;
+}
+Spinner.style.display="block"
+resultcontainer.style.display ="none"
+resultcontainer.innerHTML=""
+
+
+try{
+	let response = await fetch(`/search_product?${query}`,{
+		method:'GET'
+	})
+	console.log(response)
+	if(response.ok)
+	{
+		let data = await response.json()
+		if(data)
+	{
+		console.log(data)
+		show_products(data.Products)
+Spinner.style.display="none"
+
+   
+	}  else{
+		resultcontainer.innerHTML = "<p>No results found.</p>";
+		resultcontainer.style.display = "block";
+	}
+	}
+	else{
+		alert("false")
+	}
+}
+catch(error)
+{
+	console.log(error.message)
+}
+
+}
+
+function show_products(products) {
+    const resultsContainer = document.getElementById("search-results");
+
+    if (products.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found.</p>";
+    } else {
+        const list = document.createElement("ul");
+        list.style.listStyleType = "none";
+        list.style.padding = "0";
+
+        products.forEach(product => {
+            const listItem = document.createElement("li");
+            listItem.style.display = "flex";
+            listItem.style.alignItems = "center";
+            listItem.style.padding = "10px";
+            listItem.style.borderBottom = "1px solid #ddd";
+
+            const image = document.createElement("img");
+            image.src = `/Product_images/${product.images[0]}`;
+            image.style.width = "50px";
+            image.style.marginRight = "10px";
+            
+            const link = document.createElement("a");
+            link.href = `/product/${product._id}`;
+            link.textContent = product.name;
+            link.style.flex = "1";
+
+            listItem.appendChild(image);
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        });
+
+        resultsContainer.innerHTML = "";
+        resultsContainer.appendChild(list);
+    }
+
+    resultsContainer.style.display = "block";
+}
+
+
+		async function update_user_info(user_id) {
+			try {
+				event.preventDefault()
+				updated_profile = {
+					firstname: document.getElementById('firstname').value.trim(),
+					lastname: document.getElementById('lastname').value.trim(),
+					email: document.getElementById('email').value.trim(),
+					mobno: document.getElementById('phone').value.trim()
+
+				}
+				console.log(updated_profile)
+				const response = await fetch(`/change_userinfo/${user_id}`, {
+					method: 'PUT',
+					body: JSON.stringify(updated_profile),
+					headers: { 'Content-Type': "application/json" }
+				})
+				console.log(response)
+				if (response) {
+					alertify.success('success');
+					location.reload()
+
+				}
+			}
+			catch (error) {
+				console.log(error.message)
+			}
+		}
+
+
+		async function manage_address(user_id) {
+			console.log("start")
+
+			const response = await fetch(`/manage_address/${user_id}`, {
+				method: 'POST'
+			})
+			let data = await response.json()
+			console.log(data)
+
+			if (data.message === "add new address") {
+				let profile = document.getElementById('profie')
+				profile.style.display = 'none'
+
+				if (profile.style.display === 'none') {
+					let showing_address = document.getElementById('User_Address')
+					showing_address.style.display = "none"
+
+					let add_address = document.getElementById('address_not_found')
+
+					add_address.style.display = 'flex'
+
+
+
+
+				}
+
+			}
+			else if (data.message === "already added address") {
+				console.log("checked")
+				let profile = document.getElementById('profie')
+				profile.style.display = 'none'
+				document.getElementById('User_Address').style.display = 'block'
+			}
+
+
+		}
+
+		function add_new_address() {
+			document.getElementById('new_address').style.display = 'block'
+			let add_address = document.getElementById('address_not_found')
+
+			add_address.style.display = 'none'
+
+			document.getElementById('User_Address').style.display = 'none'
+		}
+
+
+
+		async function upload_address() {
+			try {
+				console.log("start")
+              event.preventDefault()
+
+				let house_name = document.getElementById("house_name").value.trim()
+
+
+				let street = document.getElementById("street").value.trim()
+
+
+
+				let Area = document.getElementById("Area").value.trim()
+
+
+				let pincode = document.getElementById("pincode").value.trim()
+
+
+				let landmark = document.getElementById("landmark").value.trim()
+
+
+				let district = document.getElementById("city").value.trim()
+
+
+				let state = document.getElementById("state").value.trim()
+
+
+				let address_type = document.getElementById('addressType').value.trim()
+
+
+				const address_body = {
+					house_name: house_name,
+					street: street,
+					Area: Area,
+					pincode: pincode,
+					landmark: landmark,
+					district: district,
+					state: state,
+					address_type: address_type
+				}
+				console.log("dfggf")
+
+
+				console.log(address_body)
+				let response = await fetch("/Add_User_Address", {
+					method: 'POST',
+					body: JSON.stringify(address_body),
+					headers: { "Content-Type":"application/json"}
+				})
+
+
+				console.log(response)
+
+				let data = await response.json()
+				console.log(data.message)
+				if (data.message === "added address") {
+					console.log("success")
+					alertify.success("Address Added Successfully")
+				}
+
+
+			}
+			catch (error) {
+				console.log("error", error.message)
+			}
+
+		}
+
+		
+
+
+		function showEditAddressForm(address_id, house_name, street, area, pincode, district, state, landmark, address_type) {
+			try {
+				event.preventDefault()
+
+				document.getElementById('address_not_found').style.display = 'none'
+
+				console.log("start edit")
+
+				let h_name = document.getElementById("house_name").value = house_name
+				console.log(h_name)
+
+
+				let user_street = document.getElementById("street").value = street
+				// 	user_street =  
+				console.log(user_street)
+
+				let user_Area = document.getElementById("Area").value = area
+				// 	user_Area = area
+				console.log(user_Area)
+
+				let user_pincode = document.getElementById("pincode").value = pincode
+				//       user_pincode =   pincode
+				console.log(user_pincode)
+				let user_landmark = document.getElementById("landmark").value = landmark
+				// 	user_landmark = landmark
+				console.log(user_landmark)
+				let user_district = document.getElementById("city").value = district
+				// 	user_district =  district
+				console.log(user_district)
+
+				let user_state = document.getElementById("state").value = state
+				// 	user_state = state
+				console.log(user_state)
+
+				let user_address_type = document.getElementById('addressType').value = address_type
+
+				// 	user_address_type  =  address_type
+				console.log(user_address_type)
+
+				document.getElementById('new_address').style.display = 'block'
+				document.getElementById('User_Address').style.display = 'none'
+
+
+				document.getElementById('Add_Address').style.display = 'none'
+				let update_btn = document.getElementById('address_btn_edit')
+				update_btn.style.display = 'block'
+
+				update_btn.addEventListener('click', async function (event) {
+					event.preventDefault()
+
+					let req_body = {
+						house_name: document.getElementById("house_name").value,
+						street: document.getElementById("street").value,
+						Area: document.getElementById("Area").value,
+						pincode: document.getElementById("pincode").value,
+						landmark: document.getElementById("landmark").value,
+						district: document.getElementById("city").value,
+						state: document.getElementById("state").value,
+						address_type: document.getElementById("addressType").value
+					};
+
+
+
+
+					const response = await fetch(`/update_user_address/${address_id}`, {
+						method: 'PUT',
+						body: JSON.stringify(req_body),
+						headers: { 'Content-Type': 'application/json' }
+					})
+					console.log(response)
+					if (response.ok) {
+						alertify.success("success")
+					}
+				})
+
+			}
+			catch (error) {
+				console.log(error.message)
+			}
+
+		}
+
+
+		async function deleteAddress(address_id,house_name, street, area, pincode, district, state, landmark, address_type) {
+			const address_body = {
+					house_name: house_name,
+					street: street,
+					Area: area,
+					pincode: pincode,
+					landmark: landmark,
+					district: district,
+					state: state,
+					address_type: address_type
+				}
+			 
+			
+			const response = await fetch(`/remove_user_address/${address_id}`, {
+				method: 'DELETE',
+				body:JSON.stringify(address_body),
+				headers:{'Content-Type':"application/json"}
+
+			})
+
+			console.log(response)
+			if (response.ok) {
+				alertify.success("Deleted")
+			}
+		}
+
+
+
+
+	</script>
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!-- jQuery Plugins -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/slick.min.js"></script>
+	<script src="js/nouislider.min.js"></script>
+	<script src="js/jquery.zoom.min.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>

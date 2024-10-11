@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>Electro </title>
+		<!-- alertify -->
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css"/>
+
+<!-- 
+    RTL version
+-->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.rtl.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.rtl.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.rtl.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.rtl.min.css"/>
+
+
+ 		<!-- Google font -->
+ <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+ 		<!-- Bootstrap -->
+ 		<link type="text/css" rel="stylesheet" href="/home_css/bootstrap.min.css"/>
+
+ 		<!-- Slick -->
+ 		<link type="text/css" rel="stylesheet" href="/home_css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="/home_css/slick-theme.css"/>
+
+ 		<!-- nouislider -->
+ 		<link type="text/css" rel="stylesheet" href="/home_css/nouislider.min.css"/>
+
+ 		<!-- Font Awesome Icon -->
+ 		<link rel="stylesheet" href="/home_css/font-awesome.min.css">
+
+ 		<!-- Custom stlylesheet -->
+ 		<link type="text/css" rel="stylesheet" href="/home_css/style.css"/>
+        <link rel="stylesheet" href="/css/wishlist.css">
+
+ 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+ 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+ 		<!--[if lt IE 9]>
+ 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+ 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+ 		<![endif]-->
+<style>
+#spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Ensure it is on top */
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: add a white overlay */
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.search-result-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-item .item-name {
+    font-weight: bold;
+}
+
+.search-result-item .item-category {
+    font-size: 12px;
+    color: #666;
+}
+
+	.product-thumbnail {
+    width: 100px;
+    height: 100px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .product-thumbnail:hover {
+    transform: scale(1.2);
+  }
+
+  .product-description {
+    font-size: 0.9em;
+    color: #666;
+  }
+  /* Advanced button styling */
+.advanced-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.advanced-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.advanced-btn:active {
+    transform: translateY(1px);
+}
+
+.advanced-btn .btn-icon {
+    margin-right: 8px;
+}
+
+.spinner-border {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+}
+#missing_favorites {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			/* display: none; */
+			height: 300px;
+			
+        }
+		#missing_favorites  img {
+            width: 100px;
+			height:80px;
+            margin-bottom: 20px;
+        }
+		#missing_favorites  h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+		#missing_favorites  p {
+            margin-bottom: 30px;
+        }
+        .login-button {
+            background-color: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .login-button:hover {
+            background-color: #e64a19;
+        }
+      
+  
+     </style>
+ 
+</head>
+
+<body >
+	
+		<!-- HEADER -->
+<div id="main_content">
+		<header>
+			<!-- TOP HEADER -->
+			<div id="top-header">
+				<div class="container">
+				
+					<ul class="header-links pull-right">
+						
+						<% if (isAuth) { %>
+                            <li><a href="/user_Account"><i class="fa fa-user-o"></i> <%= USER.firstname %></a></li>
+					        <a href="/logout_user">Logout</a>
+                        <% }else {%>
+                        
+						<li><a href="/login"><i class="fa fa-user-o"></i> Login</a></li>
+                            
+                    <%  } %>
+
+					</ul>
+				</div>
+			</div>
+			<!-- /TOP HEADER -->
+
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="/electro" class="logo">
+									<img src="./img/logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
+
+						<!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form style="display: flex;">
+									<input 
+										style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;border-top-right-radius: 50px;border-bottom-right-radius: 50px;width: 600px;" 
+										class="input" 
+										id="searchInput" 
+										name="query" 
+										placeholder="Search here...."
+										oninput="debouncedSearch()"
+									
+									>
+									
+								</form>
+								<div id="spinner" style="display: none;color: red;">
+									<i class="fas fa-spinner fa-spin"></i> Searching...
+								</div>
+								<div id="search-results" class="search-results" style="display: none;">
+									<!-- Search results will be injected here -->
+								</div>
+							</div>
+							
+						</div>
+						<!-- /SEARCH BAR -->
+
+						<!-- ACCOUNT -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn">
+								<!-- Wishlist -->
+								<%if(isAuth){%>
+
+								<div>
+									<a href="/wishlist">
+										<i class="fa fa-heart-o"></i>
+										<span>My Wishlist</span>
+										<div class="qty"><%= wishlist_count %></div>
+									</a>
+								</div>
+								<!-- /Wishlist -->
+
+								<!-- Cart -->
+									<div class="dropdown">
+										<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+											<i class="fa fa-shopping-cart"></i>
+											<span>My Cart</span>
+											<div class="qty">
+												<%= Item_Count %>
+											</div>
+										</a>
+										<div class="cart-dropdown">
+											<div class="cart-list">
+												<% Cart.forEach(cart=> { %>
+													<% Products.forEach(product=> { %>
+														<% cart.items.forEach(item => { %>
+														 
+														<% if (item.product_Id.toString()===product._id.toString()) { %>
+															<div class="product-widget">
+																<div class="product-img">
+																	<img src="/Product_images/<%= product.images[0] %>"
+																		alt="">
+																</div>
+																<div class="product-body">
+																	<h3 class="product-name"><a>
+																			<%= product.name %>
+																		</a></h3>
+																	<h4 class="product-price"><span class="qty"><%= item.Quantity %></span><i
+																			class="fa fa-rupee"></i>
+																		<%= product.price %>
+																	</h4>
+																</div>
+																
+															</div>
+	
+															<% } %>
+	
+																<% }) %>
+	
+																	<% }) %>
+														<% }) %>
+	
+											</div>
+											<div class="cart-summary">
+												<small><%= Item_Count %> Item(s) selected</small>
+												<h5>SUBTOTAL: <i class="fa fa-rupee"></i><%= TotalPrice %></h5>
+											</div>
+											<div class="cart-btns">
+												<a href="/cart">View Cart</a>
+												<a href="/checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+											</div>
+										</div>
+									</div>
+									<% } else {%>
+										<div class="dropdown">
+											
+											<!-- <div class="cart-dropdown">
+												<div class="cart-list">
+												</div>
+												<div class="cart-summary">
+													<small>Item(s) selected</small>
+													<h5>SUBTOTAL:</h5>
+												</div>
+												<div class="cart-btns">
+													<a href="#">View Cart</a>
+													<a href="/checkout">Checkout <i
+															class="fa fa-arrow-circle-right"></i></a>
+												</div>
+											</div> -->
+										</div>
+	
+										<% } %>
+	
+								<!-- /Cart -->
+
+								<!-- Menu Toogle -->
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="fa fa-bars"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								<!-- /Menu Toogle -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<!-- /HEADER -->
+
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="/electro">Home</a></li>
+						<li><a href="/new_products">New Arrivals</a></li>
+						<% Categories.forEach(category=> { %>
+							<li><a href="/store/<%= category._id %> ">
+									<%= category.name %>
+								</a></li>
+	
+							<% }) %>
+					
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Regular Page</h3>
+						<!-- <ul class="breadcrumb-tree">
+							<li><a href="/electro">Home</a></li>
+							<li class="active">Wishlist</li>
+						</ul> -->
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		
+		<!-- /BREADCRUMB -->
+        <section id="wishlist" class="section" >
+            <div class="container">
+                <div class="table-responsive">
+					<table class="table table-hover table-responsive">
+						
+						<tbody>
+						  <% Products.forEach(product => { %>
+							<% wishlist.forEach(item => { %>
+							  <% item.products.forEach(wish => { %>
+								<% if (wish.product_Id.toString() === product._id.toString()) { %>
+								  <tr class="wishlist-item" >
+									<td class="product-img"  style="display: flex ; gap:10px"  onclick="window.location.href='/product/<%= product._id %>'">
+									  <img  src="/Product_images/<%= product.images[0] %>" alt="Product Image" class="img-fluid product-thumbnail">
+									  <h4 class="product-name"  style="display: flex; flex-direction: column; align-items: baseline; ">
+										<a><%= product.name %></a>
+										<p style="display: flex;"><i class="fa fa-rupee"></i><%= product.price %></p>
+									  </h4>
+								
+									</td>
+					
+									<td class="product-actions">
+										<button class="advanced-btn remove-wishlist-item" onclick="remove_from_wishlist('<%= product._id %>')" data-toggle="tooltip" data-placement="top" title="Remove from Wishlist">
+											<i class="fa fa-trash btn-icon"></i> Remove
+										</button>
+										<button class="advanced-btn add-cart-item" onclick="add_to_cart('<%= product._id %>')" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+											<i class="fa fa-shopping-cart btn-icon"></i> Add to Cart
+										</button>
+									 
+									  <!-- <div class="spinner-border text-primary d-none" role="status" id="loading-
+										<span class="sr-only">Loading...</span>
+									  </div> -->
+									</td>
+								  </tr>
+								<% } %>
+							  <% }) %>
+							<% }) %>
+						  <% }) %>
+						</tbody>
+					  </table>
+					  
+                </div>
+            </div>
+
+			
+        </section>
+        <div class="wishlist_empty_main"  id="missing_favorites">
+			<img src="/img/mywishlist-empty.png" alt="CaIcon">
+			<h1>Empty Wishlist</h1>
+			<p>You have no items in your Wislist.save your Favourites</p>
+	
+		
+		</div>
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- NEWSLETTER -->
+		<div id="newsletter" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="newsletter">
+							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+							<form>
+								<input class="input" type="email" placeholder="Enter Your Email">
+								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+							</form>
+							<ul class="newsletter-follow">
+								<li>
+									<a href="#"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-pinterest"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /NEWSLETTER -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">About Us</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categories</h3>
+								<ul class="footer-links">
+									<% Categories.forEach(category => { %>
+										<li><a href="#"><%=category.name  %></a></li>
+										 
+										<% }) %>
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Information</h3>
+								<ul class="footer-links">
+									<li><a href="#">About Us</a></li>
+									<li><a href="/contact_us">Contact Us</a></li>
+									<li><a href="#">Privacy Policy</a></li>
+									<li><a href="#">Orders and Returns</a></li>
+									<li><a href="#">Terms & Conditions</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Service</h3>
+								<ul class="footer-links">
+									<% if (isAuth) { %>
+										<li><a href="/user_Account"> My Account</a></li>
+									<% }	%>
+									<li><a href="/cart">View Cart</a></li>
+									<li><a href="/wishlist">Wishlist</a></li>
+									<li><a href="#">Track My Order</a></li>
+									<li><a href="#">Help</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /top footer -->
+
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<ul class="footer-payments">
+								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+							</ul>
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved  <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+
+
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+	</div>
+		<!-- /FOOTER -->
+    <script>
+
+let debouncedtimer;
+function debouncedSearch()
+{
+clearTimeout(debouncedtimer)
+ debouncedtimer= setTimeout(() => {
+		search_it()
+	}, 300);
+}
+	
+async function search_it()
+{
+let input =	document.getElementById("searchInput").value
+let query = new URLSearchParams({query:input})
+let resultcontainer = document.getElementById("search-results")
+let Spinner = document.getElementById("spinner")
+
+if(input.trim()==="")
+{
+	resultcontainer.style.display ="none"
+	return;
+}
+Spinner.style.display="block"
+resultcontainer.style.display ="none"
+resultcontainer.innerHTML=""
+
+
+try{
+	let response = await fetch(`/search_product?${query}`,{
+		method:'GET'
+	})
+	console.log(response)
+	if(response.ok)
+	{
+		let data = await response.json()
+		if(data)
+	{
+		console.log(data)
+		show_products(data.Products)
+Spinner.style.display="none"
+
+   
+	}  else{
+		resultcontainer.innerHTML = "<p>No results found.</p>";
+		resultcontainer.style.display = "block";
+	}
+	}
+	else{
+		alert("false")
+	}
+}
+catch(error)
+{
+	console.log(error.message)
+}
+
+}
+
+function show_products(products) {
+    const resultsContainer = document.getElementById("search-results");
+
+    if (products.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found.</p>";
+    } else {
+        const list = document.createElement("ul");
+        list.style.listStyleType = "none";
+        list.style.padding = "0";
+
+        products.forEach(product => {
+            const listItem = document.createElement("li");
+            listItem.style.display = "flex";
+            listItem.style.alignItems = "center";
+            listItem.style.padding = "10px";
+            listItem.style.borderBottom = "1px solid #ddd";
+
+            const image = document.createElement("img");
+            image.src = `/Product_images/${product.images[0]}`;
+            image.style.width = "50px";
+            image.style.marginRight = "10px";
+            
+            const link = document.createElement("a");
+            link.href = `/product/${product._id}`;
+            link.textContent = product.name;
+            link.style.flex = "1";
+
+            listItem.appendChild(image);
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        });
+
+        resultsContainer.innerHTML = "";
+        resultsContainer.appendChild(list);
+    }
+
+    resultsContainer.style.display = "block";
+}
+
+
+
+async function add_to_cart(Product_id) {
+	console.log("start")
+			// let qty = document.getElementById('qty').value
+			// let req_body = { quantity: qty }
+			let response = await fetch(`/add_to_cart/${Product_id}`, {
+				method: 'POST',
+			})	
+			if(response.ok){
+				
+			// let addcart =  document.getElementById('Cart')
+			// addcart.style.display='none'
+		
+            //   let gotocart=  document.getElementById('go_cart')
+			// console.log(gotocart)
+
+            //    gotocart.style.display='block'
+			// console.log(gotocart)
+
+				alert("success")
+				
+			}
+
+			}
+			
+ async function remove_from_wishlist(product_id){
+ let response = await fetch(`/remove_from_wishlst/${product_id}`,{
+	method:'PUT'
+   })
+   console.log(response)
+ let data =  await response.json()
+ if(data.message==="removed")
+{
+
+	alertify.success("Removed from wishlist")
+	
+localStorage.setItem(`wishlistButtonClass_${product_id}`,'fa-heart-o')
+
+}
+  }
+
+
+document.addEventListener("DOMContentLoaded", async function() {
+  try {
+    const response = await fetch('/wishlist_empty', { method: 'GET' });
+    console.log("emopty",response);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log('Server Response:', data);
+
+    const wishlistElement = document.getElementById('wishlist');
+    const missingFavoritesElement = document.getElementById('missing_favorites');
+ console.log(missingFavoritesElement)
+    if (data.success) {
+    
+  missingFavoritesElement.style.display = "block";
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+});
+
+	</script>
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+	
+		<!-- jQuery Plugins -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/slick.min.js"></script>
+		<script src="js/nouislider.min.js"></script>
+		<script src="js/jquery.zoom.min.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>

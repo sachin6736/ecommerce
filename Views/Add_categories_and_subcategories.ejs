@@ -1,0 +1,245 @@
+<%- include('header', { admin: admin }) %>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css"/>
+
+<!-- 
+    RTL version
+-->
+<style>
+.main_container {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #cfcfcfec;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+    text-align: center;
+    color: #33333349;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333333be;
+}
+.square-upload {
+    position: relative;
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Ensure it's square */
+    border: 2px dashed #007bff;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+
+.square-upload input[type="file"] {
+    display: none;
+}
+
+.upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #007bff;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.square-upload:hover {
+    background-color: #007bff;
+    border-color: #0056b3;
+}
+
+.square-upload:hover .upload-label {
+    color: #fff;
+}
+
+img {
+    width: 70px; /* Adjust the size as needed */
+    height: 70px; 
+    /* Size of the camera icon */
+}
+
+
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+}
+
+button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button[type="submit"] {
+    background-color: #4077ee;
+}
+
+button[type="submit"]:hover {
+    background-color:  #3e75ee;;
+}
+.container {
+            width: 80%;
+            margin: auto;
+              padding: 20px;
+            background-color: #b9aeaebd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    
+        .form-group {
+            margin-bottom: 20px;
+        }
+    
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    
+        .form-group input,
+        .form-group select {
+            width: calc(100% - 12px);
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+    
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+</style>
+<div class="main_container">
+    <h1>Add Category & Subcategory</h1>
+
+    <!-- Form to add new category -->
+    <form   enctype="multipart/form-data" method="post"   id="cat_form">
+        <h2>Add New Category</h2>
+        <div class="square-upload">
+            <input type="file" name="image" id="image">
+            <label for="image" class="upload-label">
+         
+            </label>
+        </div>
+
+        <div>
+            <label for="categoryName">Category Name:</label>
+            <input type="text" id="categoryName" name="categoryName" required>
+        </div>
+       
+        <button type="button"  onclick="submit_categories()" >Add Category</button>
+    </form>
+
+    <!-- Form to add new subcategory -->
+  
+    
+    <div class="container">
+        <h2>Add New Subcategory</h2>
+        <form action="/Add-subcategory" method="post" >
+            <div class="form-group">
+                <label for="categoryId">Select Category:</label>
+                <select id="categoryId" name="categoryId" required>
+                    <% Categories.forEach(category => { %>
+                        <option value="<%= category._id %>"><%= category.name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subCategoryName">Subcategory Name:</label>
+                <input type="text" id="subCategoryName" name="subCategoryName" required>
+            </div>
+            <button type="button" class="btn-submit">Add Subcategory</button>
+        </form>
+    </div>
+<script>
+ async function submit_categories(){
+
+ 
+  let form = document.getElementById('cat_form')
+  let  formData =  new FormData(form)
+  console.log(formData)
+  const response = await fetch('/Add_categories',{
+      method:'POST',
+      body:formData
+    })
+    console.log(response)
+    if(response.ok)
+    {
+        const data = await response.json()
+        if(data.success)
+    {
+alertify.success("Added category successfully")
+           
+    }
+   
+    }
+    
+ }
+
+</script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+<%- include('footer') %>

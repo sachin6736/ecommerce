@@ -1,0 +1,76 @@
+/* Contact Section */
+.contact-us {
+    padding: 50px 0;
+}
+
+.contact-us .contact-form {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-us .contact-form h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.contact-us .contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-us .contact-form .form-group label {
+    font-weight: 600;
+    color: #333;
+}
+
+.contact-us .contact-form .form-control {
+    border-radius: 50px;
+    padding: 10px 20px;
+    height: 45px;
+    font-size: 16px;
+}
+
+.contact-us .contact-form .form-control:focus {
+    border-color: #f69314;
+    box-shadow: 0 0 5px rgba(246, 147, 20, 0.5);
+}
+
+.contact-us .contact-form .btn-primary {
+    background: #f69314;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+.contact-us .contact-form .btn-primary:hover {
+    background: #e28212;
+}
+
+.contact-us .contact-info {
+    margin-top: 30px;
+}
+
+.contact-us .contact-info h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.contact-us .contact-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-us .contact-info ul li {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.contact-us .contact-info ul li i {
+    color: #f69314;
+    margin-right: 10px;
+}

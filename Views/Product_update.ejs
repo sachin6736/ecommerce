@@ -1,0 +1,180 @@
+<%- include('header',{admin:admin}) %>
+<style>
+        .product_container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product_title {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+        height: 100px; /* Adjust as needed */
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="product_container">
+    <div class="product_title">Update Product</div>
+
+    <form  id="product_form" action="#"  enctype="multipart/form-data">
+ 
+    
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>" >
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="5"><%= product.description %></textarea>
+        </div>
+        <div class="form-group">
+            <label for="categoryId">Select Category:</label>
+            <select id="categoryId" name="categoryId" class="form-control"  onchange="get_subcategories()">
+                <% Categories.forEach(category => { %>
+                    <% if (category._id.toString() == product.category_Id.toString()) { %>
+                        <option selected  value="<%= category._id %>"><%= category.name %></option>
+                        <% } else{%>
+                            <option   value="<%= category._id %>"><%= category.name %></option>
+                            <% } %>
+                <% }) %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="subcategory_id">Select Sub Category</label>
+            <select id="subcategory_id" name="Sub_category_Id" class="form-control" >
+                <% SubCategories.forEach(Subcategory => { %>
+                    <% if (Subcategory._id.toString()  === product.sub_category_Id.toString()) { %>
+                    <option  selected  value="<%= Subcategory._id %>"> <%= Subcategory.name  %></option>                      
+                     <% } else { %>
+                    <option   value="<%= Subcategory._id %>"> <%= Subcategory.name  %></option>                                           
+                     <% } %>
+                     <% })%>
+            </select>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price" value="<%= product.price %>">
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <input type="text" class="form-control" id="brand" name="brand" value="<%= product.brand %>">
+        </div>
+        <div class="form-group">
+            <label for="image">Images</label>
+            <input type="file" class="form-control-file" id="image"   name="images" multiple value="" onchange="submit_files()">
+            <img src="/product_images/<%= product.images[0]%>" alt="<%= product.name %>" style="max-width: 100px;">
+        </div>
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="number" class="form-control" id="stock" name="stock" value="<%= product.stock %>" >
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="update_product(event,'<%=product._id%>')">Update Product</button>
+    </form>
+</div>
+
+<script>
+   
+    async function get_subcategories() {
+            const categoryId = document.getElementById('categoryId').value;
+            const subcategorySelect = document.getElementById('subcategory_id');
+            
+            subcategorySelect.innerHTML = ''; 
+    
+            
+                const response = await fetch(`/set_subcategories/${categoryId}`);
+                const subcategories = await response.json();
+    
+                subcategories.forEach(subcategory => {
+                    console.log(subcategory)
+                    const option = document.createElement('option');
+                    option.value = subcategory._id;
+                    option.textContent = subcategory.name;
+                    subcategorySelect.appendChild(option);
+                });
+          
+        }
+        
+        var images = [];
+
+function submit_files() {
+    let imageInput = document.getElementById('image');
+    let files = imageInput.files;
+    
+    for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        images.push(file);
+    } 
+    console.log(images);
+}
+
+async function update_product(event,productId) {
+    event.preventDefault()
+    console.log(images);
+
+    const form = document.getElementById('product_form');
+    const formdata = new FormData(form); // Use `formData` instead of `FormData` to avoid confusion
+
+    images.forEach(imageFile => {
+        formdata.append('images', imageFile);
+    });
+
+   
+        const response = await fetch(`/update_product/${productId}`, {
+            method: 'POST',
+            body: formdata
+        });
+        const data = await response.json()
+        console.log(data)
+        if(data.success === true){
+            alert("updated")
+            window.location.href='/products'
+        }
+    } 
+
+
+</script>
+<%- include('footer') %>

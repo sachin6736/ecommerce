@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Electro - HTML Ecommerce Template</title>
+	<!-- alertify -->
+	<!-- <link rel="stylesheet"  type="text/html"   href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" /> -->
+		<!-- Default theme -->
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css"/>
+
+<!-- 
+    RTL version
+-->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.rtl.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.rtl.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.rtl.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.rtl.min.css"/>
+
+
+<!-- 
+    RTL version
+-->
+
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="/home_css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="/home_css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="/home_css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="/home_css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/home_css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="/home_css/style.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+
+ 		<![endif]-->
+	<style>
+	
+
+
+h3 {
+    color: #343a40;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.lead {
+    font-weight: 700;
+}
+
+/* Quantity controls */
+.btn-link {
+    color: #007bff;
+    font-size: 1.25rem;
+}
+
+.btn-link:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.form-control-sm {
+    width: 60px;
+    text-align: center;
+}
+
+/* Pricing */
+h5 {
+    font-size: 1.5rem;
+    color: #495057;
+}
+
+/* Discount code */
+.form-outline {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.form-control-lg {
+    font-size: 1.25rem;
+}
+
+.form-label {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+/* Buttons */
+.btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* Total price and quantity */
+#total-price, #total-quantity {
+    font-weight: 700;
+    color: #343a40;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+.summary-container {
+    background: linear-gradient(to right, #ffffff, #f9f9f9);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.summary-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.summary-item {
+    font-size: 18px;
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.summary-label {
+    font-weight: bold;
+    color: #333333;
+}
+
+.summary-value {
+    font-weight: normal;
+    color: #666666;
+}
+
+.summary-item:hover .summary-label, 
+.summary-item:hover .summary-value {
+    color: #007bff;
+}
+
+.summary-container .fa-rupee {
+    color: #333333;
+    margin-right: 5px;
+}
+
+.card-title {
+    font-size: 22px;
+    color: #007bff;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.card-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #007bff;
+    margin: 10px auto 0;
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+	
+}	
+.product-available{
+color: rgb(12, 155, 12);
+font-weight: bold;
+
+}
+.cart_missing_main {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			display: none;
+			height: 300px;
+			
+        }
+        .cart_missing_main img {
+            width: 100px;
+			height:80px;
+            margin-bottom: 20px;
+        }
+        .cart_missing_main h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .cart_missing_main p {
+            margin-bottom: 30px;
+        }
+        .login-button {
+            background-color: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .login-button:hover {
+            background-color: #e64a19;
+        }
+		
+.search-results {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.search-result-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-item .item-name {
+    font-weight: bold;
+}
+
+.search-result-item .item-category {
+    font-size: 12px;
+    color: #666;
+}
+
+</style>
+</head>
+
+<body>
+	<!-- HEADER -->
+	<header>
+		<!-- TOP HEADER -->
+		<div id="top-header">
+			<div class="container">
+				
+				<ul class="header-links pull-right">
+					<% if (isAuth) { %>
+						<li><a href="/user_Account"><i class="fa fa-user-o"></i><%= USER.firstname %></a></li>
+						<a href="/logout_user">Logout</a>
+						<% }else {%>
+
+							<li><a href="/login"><i class="fa fa-user-o"></i> Login</a></li>
+
+							<% } %>
+
+				</ul>
+			</div>
+		</div>
+		<!-- /TOP HEADER -->
+
+		<!-- MAIN HEADER -->
+		<div id="header">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- LOGO -->
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="/electro" class="logo">
+								<img src="/img/logo.png" alt="">
+							</a>
+						</div>
+					</div>
+					<!-- /LOGO -->
+
+					<!-- SEARCH BAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form style="display: flex;">
+								<input 
+									style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;border-top-right-radius: 50px;border-bottom-right-radius: 50px;width: 600px;" 
+									class="input" 
+									id="searchInput" 
+									name="query" 
+									placeholder="Search here...."
+									oninput="debouncedSearch()"
+								
+								>
+								
+							</form>
+							<div id="spinner" style="display: none;color: red;">
+								<i class="fas fa-spinner fa-spin"></i> Searching...
+							</div>
+							<div id="search-results" class="search-results" style="display: none;">
+								<!-- Search results will be injected here -->
+							</div>
+						</div>
+						
+					</div>
+					<!-- /SEARCH BAR -->
+
+					<!-- ACCOUNT -->
+					<div class="col-md-3 clearfix">
+						<div class="header-ctn">
+							<!-- Wishlist -->
+							<%if(isAuth){%>
+
+							<div>
+								<a href="/wishlist">
+									<i class="fa fa-heart-o"></i>
+									<span>My Wishlist</span>
+									<div class="qty"><%= wishlist_count %></div>
+								</a>
+							</div>
+							<!-- /Wishlist -->
+
+							<!-- Cart -->
+								<div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart"></i>
+										<span>My Cart</span>
+										<div class="qty">
+											<%= Item_Count %>
+										</div>
+									</a>
+									<div class="cart-dropdown">
+										<div class="cart-list">
+											<% Cart.forEach(cart=> { %>
+												<% Products.forEach(product=> { %>
+													<% cart.items.forEach(item => { %>
+													 
+													<% if (item.product_Id.toString()===product._id.toString()) { %>
+														<div class="product-widget">
+															<div class="product-img">
+																<img src="/Product_images/<%= product.images[0] %>"
+																	alt="">
+															</div>
+															<div class="product-body">
+																<h3 class="product-name"><a href="#">
+																		<%= product.name %>
+																	</a></h3>
+																<h4 class="product-price"><span class="qty"><%= item.Quantity %></span><i
+																		class="fa fa-rupee"></i>
+																	<%= product.price %>
+																</h4>
+															</div>
+															<button class="delete"><i class="fa fa-close"></i></button>
+														</div>
+
+														<% } %>
+
+															<% }) %>
+
+																<% }) %>
+													<% }) %>
+
+										</div>
+										<div class="cart-summary">
+											<small><%= Item_Count %> Item(s) selected</small>
+											<h5>SUBTOTAL: <i class="fa fa-rupee"></i><%= TotalPrice %></h5>
+										</div>
+										<div class="cart-btns">
+											<a href="/cart">View Cart</a>
+											<a href="/checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
+								</div>
+								<% } else {%>
+									<div>
+										<a href="/login">
+											<i class="fa fa-heart-o"></i>
+											<span>My Wishlist</span>
+											<div class="qty">0</div>
+										</a>
+									</div>
+									<div class="dropdown">
+										<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="/login">
+											<i class="fa fa-shopping-cart"></i>
+											<span>Your Cart</span>
+											<div class="qty">0</div>
+										</a>
+										<div class="cart-dropdown">
+											<div class="cart-list">
+											</div>
+											<div class="cart-summary">
+												<small>Item(s) selected</small>
+												<h5>SUBTOTAL:</h5>
+											</div>
+											<div class="cart-btns">
+												<a href="/login">View Cart</a>
+												<a href="/login">Checkout <i
+														class="fa fa-arrow-circle-right"></i></a>
+											</div>
+										</div>
+									</div>
+
+									<% } %>
+										<!-- /Cart -->
+
+										<!-- Menu Toogle -->
+										<div class="menu-toggle">
+											<a href="#">
+												<i class="fa fa-bars"></i>
+												<span>Menu</span>
+											</a>
+										</div>
+										<!-- /Menu Toogle -->
+						</div>
+					</div>
+					<!-- /ACCOUNT -->
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /MAIN HEADER -->
+	</header>
+	<!-- /HEADER -->
+
+	<!-- NAVIGATION -->
+	<nav id="navigation">
+		<!-- container -->
+		<div class="container">
+			<!-- responsive-nav -->
+			<div id="responsive-nav">
+				<!-- NAV -->
+				<ul class="main-nav nav navbar-nav">
+					<li class="active"><a href="/electro">Home</a></li>
+					<li><a href="/new_products">New Arrivals</a></li>
+					<% Categories.forEach(category=> { %>
+						<li><a href="/store/<%= category._id %> ">
+								<%= category.name %>
+							</a></li>
+
+						<% }) %>
+
+
+				</ul>
+				<!-- /NAV -->
+			</div>
+			<!-- /responsive-nav -->
+		</div>
+		<!-- /container -->
+	</nav>
+	<!-- /NAVIGATION -->
+
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb" class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- <h3 class="breadcrumb-header">cart Page</h3> -->
+					
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- SECTION -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /SECTION -->
+
+	
+	 
+	<section class="h-100"   id="isincart"  >
+		<div class="container h-100 py-5"  >
+			<div class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col-10">
+
+					<div class="d-flex justify-content-between align-items-center mb-4">
+						<h3 class="fw-normal mb-0">Shopping Cart</h3>
+						<div>
+							<p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!"
+									class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
+						</div>
+				</div>
+					<% Products.forEach(product => { %>
+						<% Cart.forEach(cart => { %>
+						
+							<% cart.items.forEach(item => { %>
+								<% if (item.product_Id.toString() === product._id.toString()) { %>
+							
+								
+									<div class="card rounded-3 mb-4"  >
+										<div class="card-body p-4">
+											<div class="row d-flex justify-content-between align-items-center">
+												<div class="col-md-2 col-lg-2 col-xl-2"  onclick="window.location.href='/product/<%= product._id %>'" >
+													<img src="/Product_images/<%= product.images[0] %>"
+														class="img-fluid rounded-3" alt=""  style="max-width:100px ;max-height: 100px;"   >
+												</div>
+												<div class="col-md-3 col-lg-3 col-xl-3">
+													<p class="lead fw-normal mb-2">
+														<%= product.name %>
+													
+													</p>
+													<h5 class="mb-0"><i class="fa fa-rupee"></i>
+														<%= product.price %>
+													</h5>
+
+												
+											
+											
+													<div>
+														<div class="product-rating"  style="color: green;">
+														<i class="fa fa-star-o empty"></i>
+														<i class="fa fa-star-o empty"></i>
+														<i class="fa fa-star-o empty"></i>
+														<i class="fa fa-star-o empty"></i>
+														<i class="fa fa-star-o empty"></i>
+
+															
+														</div>
+														<a class="review-link" href="#">0 Review(s) </a>
+													</div>
+
+													<% if (product.stock < 10) { %>
+														<span class="product-available">only <%= stock  %> left</span>
+													<% } else if(product.stock > 10) { %>
+														<span class="product-available">In Stock</span>
+													<% } else {%>
+														<span class="product-available">Out of Stock</span>
+
+														<% } %>
+													
+												</div>
+
+					
+												<div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+												Qty	<input id="form1" min="1" name="quantity" value="<%= item.Quantity %>"
+														type="number" class="form-control form-control-sm"  onclick="update_quantity(event,'<%= product._id %>')">
+												</div>
+												<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+													<h5 class="mb-0"   ><i class="fa fa-rupee"  ></i>
+														<%= product.price * item.Quantity %>
+													</h5>
+												</div>
+												<div class="col-md-1 col-lg-1 col-xl-1 text-end">
+													<button style="border: none;" class="text-danger"
+														onclick="remove_from_cart('<%= product._id %>')">
+														<i class="fas fa-trash"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								<% } %>
+							<% }) %>
+						<% }) %>
+					<% }) %>
+					
+
+					<div class="container mt-4">
+						<div class="row justify-content-end">
+							<div class="col-md-6 col-lg-4">
+								<div class="card border-0 shadow-sm summary-container">
+									<div class="card-body">
+										<h5 class="card-title">Cart Summary</h5>
+										<p class="summary-item">
+											<span class="summary-label">Total Items:</span>
+											<span class="summary-value"><%= Item_Count %></span>
+										</p>
+										<p class="summary-item">
+											<span class="summary-label">Total Price:</span>
+											<span class="summary-value"><i class="fa fa-rupee"></i><%=  TotalPrice %> </span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+                                    
+										<div class="card mb-4">
+												<div class="card-body p-4 d-flex flex-row">
+													<div data-mdb-input-init class="form-outline flex-fill">
+														<input type="text" id="form1"
+															class="form-control form-control-lg" />
+														<label class="form-label" for="form1">Discound code</label>
+													</div>
+													<button type="button" data-mdb-button-init data-mdb-ripple-init
+														class="btn btn-outline-warning btn-lg ms-3">Apply</button>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-body">
+													<button type="button"   class="btn btn-warning btn-block btn-lg"  onclick="buy_product()">Place Order</button>
+												</div>
+											</div>
+
+				</div>
+			</div>
+		</div>
+	
+
+		
+		</section>
+		<div class="cart_missing_main"  id="missing_cart">
+			<img src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" alt="Cart Icon">
+			<h1>Missing Cart items?</h1>
+			<p>Login to see the items you added previously</p>
+		
+		</div>
+		
+
+	<!-- NEWSLETTER -->
+	<div id="newsletter" class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="newsletter">
+						<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+						<form>
+							<input class="input" type="email" placeholder="Enter Your Email">
+							<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+						</form>
+						<ul class="newsletter-follow">
+							<li>
+								<a href="#"><i class="fa fa-facebook"></i></a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-instagram"></i></a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-pinterest"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /NEWSLETTER -->
+
+	<!-- FOOTER -->
+	<footer id="footer">
+		<!-- top footer -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">About Us</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+								incididunt ut.</p>
+							<ul class="footer-links">
+								<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+								<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Categories</h3>
+							<ul class="footer-links">
+								<% Categories.forEach(category=> { %>
+									<li><a href="#">
+											<%= category.name %>
+										</a></li>
+
+									<% }) %>
+
+							</ul>
+						</div>
+					</div>
+
+					<div class="clearfix visible-xs"></div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Information</h3>
+							<ul class="footer-links">
+								<li><a href="#">About Us</a></li>
+								<li><a href="/contact_us">Contact Us</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="#">Orders and Returns</a></li>
+								<li><a href="#">Terms & Conditions</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Service</h3>
+							<ul class="footer-links">
+								<% if (isAuth) { %>
+									<li><a href="/user_Account"> My Account</a></li>
+									<% } %>
+										<li><a href="/cart">View Cart</a></li>
+										<li><a href="/wishlist">Wishlist</a></li>
+										<li><a href="#">Track My Order</a></li>
+										<li><a href="#">Help</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /top footer -->
+
+		<!-- bottom footer -->
+		<div id="bottom-footer" class="section">
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<ul class="footer-payments">
+							<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+							<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+						</ul>
+						<span class="copyright">
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>document.write(new Date().getFullYear());</script> All rights reserved | This
+							template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</span>
+
+
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /bottom footer -->
+	</footer>
+	<!-- /FOOTER -->
+	<script>
+let debouncedtimer;
+function debouncedSearch()
+{
+clearTimeout(debouncedtimer)
+ debouncedtimer= setTimeout(() => {
+		search_it()
+	}, 300);
+}
+	
+async function search_it()
+{
+let input =	document.getElementById("searchInput").value
+let query = new URLSearchParams({query:input})
+let resultcontainer = document.getElementById("search-results")
+let Spinner = document.getElementById("spinner")
+
+if(input.trim()==="")
+{
+	resultcontainer.style.display ="none"
+	return;
+}
+Spinner.style.display="block"
+resultcontainer.style.display ="none"
+resultcontainer.innerHTML=""
+
+
+try{
+	let response = await fetch(`/search_product?${query}`,{
+		method:'GET'
+	})
+	console.log(response)
+	if(response.ok)
+	{
+		let data = await response.json()
+		if(data)
+	{
+		console.log(data)
+		show_products(data.Products)
+Spinner.style.display="none"
+
+   
+	}  else{
+		resultcontainer.innerHTML = "<p>No results found.</p>";
+		resultcontainer.style.display = "block";
+	}
+	}
+	else{
+		alert("false")
+	}
+}
+catch(error)
+{
+	console.log(error.message)
+}
+
+}
+
+function show_products(products) {
+    const resultsContainer = document.getElementById("search-results");
+
+    if (products.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found.</p>";
+    } else {
+        const list = document.createElement("ul");
+        list.style.listStyleType = "none";
+        list.style.padding = "0";
+
+        products.forEach(product => {
+            const listItem = document.createElement("li");
+            listItem.style.display = "flex";
+            listItem.style.alignItems = "center";
+            listItem.style.padding = "10px";
+            listItem.style.borderBottom = "1px solid #ddd";
+
+            const image = document.createElement("img");
+            image.src = `/Product_images/${product.images[0]}`;
+            image.style.width = "50px";
+            image.style.marginRight = "10px";
+            
+            const link = document.createElement("a");
+            link.href = `/product/${product._id}`;
+            link.textContent = product.name;
+            link.style.flex = "1";
+
+            listItem.appendChild(image);
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        });
+
+        resultsContainer.innerHTML = "";
+        resultsContainer.appendChild(list);
+    }
+
+    resultsContainer.style.display = "block";
+}
+
+
+
+
+async function remove_from_cart(cart_id) {
+    alertify.confirm("Are you sure you want to remove this item ", 
+        async function() {
+      
+                const response = await fetch(`/remove_from_cart/${cart_id}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+                if (data === "Removed from Cart") {
+                    alertify.success("Item removed from cart");
+                 
+                } else {
+                    alertify.error("Error occurred while removing item from cart");
+
+
+                }
+          
+        }, 
+        function() {
+            alertify.error('Cancel');
+        }
+    );
+}
+
+// window.onerror = function (message, source, lineno, colno, error) {
+//   console.error('Global error handler:', message, source, lineno, colno, error);
+//   window.location.href = '/error_found';
+//   return true; // Prevents the browser from showing the default error message
+// };
+
+
+
+			
+		
+
+
+
+		async function update_quantity(event,product_id){
+			event.preventDefault()
+			console.log("start")
+		let new_quantity =	document.getElementById('form1').value
+		console.log(new_quantity)
+		req_body={quantity:new_quantity}
+		const response = await 	fetch(`/update_quantity/${product_id}`,{
+				method:'PUT',
+				body:JSON.stringify(req_body),
+				headers:{'Content-Type':'application/json'}
+
+			})
+			console.log(response)
+			if(response.ok){
+				alertify.success('Added one more quantity');
+
+			location.reload()
+				
+			}
+			else{
+				
+			}
+		}
+
+
+		async function buy_product() {
+			console.log("start")
+
+			// console.log(user_id)
+			//
+			// let req_body = ({uid:user_id})
+			// let query = new URLSearchParams(req_body).toString()
+			// console.log(query)
+			const response = await fetch(`/place_order`, {
+				method: 'GET',
+			})
+		console.log(response)
+
+		if(response.ok){
+			window.location.href=`/checkout`
+		}
+			
+
+		}
+
+		document.addEventListener("DOMContentLoaded", async function() {
+  try {
+	console.log("start")
+    const response = await fetch('/cart_empty', 
+	{ method: 'GET' 
+
+	});
+	
+	console.log("fetched")
+    
+   console.log(response)
+
+    const data = await response.json();
+
+
+    if (data.success) {
+      const isInCartElement = document.getElementById('isincart');
+      const missingCartElement = document.getElementById('missing_cart');
+    
+        isInCartElement.style.display = "none";
+        missingCartElement.style.display = "block";
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+});
+	</script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+<!-- <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	jQuery Plugins -->
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/slick.min.js"></script>
+	<script src="js/nouislider.min.js"></script>
+	<script src="js/jquery.zoom.min.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>

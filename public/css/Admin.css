@@ -1,0 +1,275 @@
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-image:url('/img/Admin_Home.jpg');
+    background-size: cover;
+    overflow: hidden;
+    
+}
+
+
+
+
+
+.header {
+    width: 100%;
+    height: 5%;
+    background: linear-gradient(rgba(255, 255, 255, 0.699), rgba(255, 255, 255, 0.712));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    position: static;
+    box-shadow: 0 0 10px 1px black;
+
+ 
+}
+.header_links
+{
+    width: 15%;
+    justify-content: space-evenly;
+    
+
+}
+hr{
+    width: 150px;
+    background-color: #ffffff;
+}
+
+.title {
+    color: rgba(0, 0, 0, 0.74);
+    font-size: 20px;
+    padding-left: 200px;
+    display: flex;
+    justify-content: center;
+}
+.admin_welcome{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.dashboard_title {
+   
+    margin-bottom: 20px;
+    color: #343a40;
+    font-size: 30px;
+}
+
+
+#side_bar {
+    width: 13%;
+    min-height: 100vh;
+    background-color: #242424; /* Changed to gray */
+    margin: 0;
+    padding: 0;
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    position: static;
+    box-shadow: 0 0 0px 1px black;
+    z-index: 2;
+
+
+}
+
+
+
+.profile_icon {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff; /* Background color of the icon */
+    border-radius: 50%; /* Make it a circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile_icon i {
+    color: #552a2a; /* Icon color */
+    font-size: 24px; /* Icon size */
+}
+
+
+
+.centre {
+    width: 100%;
+    height: 95%;
+    display: flex;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner_content {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(88, 88, 172, 0.11);
+    border-radius: 10px 10px 15px 15px;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    display: flex;
+    align-items:start;
+    
+  
+}
+
+.logout {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding-right: 10px;
+}
+
+.logout:hover {
+    color: blue;
+}
+
+
+
+.side_btn {
+    width: 100%; /* Ensure the button itself spans the full width */
+    height: 60px; /* Adjust height to fit content */
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.897);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:lighter;
+    position: relative;
+    transition: all 0.5s;
+    z-index: 1;
+    text-align:start;  
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    display: flex;
+      flex-direction: revert;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+.side_text{
+   border-style: none;
+   width: 60%;
+   background: transparent;
+   display: flex;
+  
+}
+
+.side_btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: all 0.2s ease-in-out;
+   
+
+}
+ 
+  .side_btn:hover::before {
+    background-color: rgba(92, 90, 90, 0.918);
+    
+} 
+
+
+.side_btn:active {
+    transform: scale3d(1);
+    background-color:white;
+} 
+
+
+
+a {
+    text-decoration: none;
+}
+
+.side_btns
+{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-top:50px;
+}
+.admin_account
+{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    border-bottom:2px solid white;
+}
+
+.profile-info {
+   
+
+    margin-bottom: 15px;
+}
+.profile-info a{
+    font-size: 1.2rem;
+    background-color: #ffffffc2;
+    width: 43px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    
+}
+.profile-info p {
+    font-size: 1rem;
+    margin: 0;
+    color: #777;
+}
+.profile-info i{
+    width: 13px;
+}
+@media screen and (max-width: 500px) {
+    #side_bar {
+        width: 100%;
+        float: none;
+    }
+
+    .content {
+      margin-left: 0; /* Remove margin for full width */
+    }
+    
+    .header_links {
+      flex-direction: column;
+    }
+    
+    .side_btn {
+      width: auto;
+    }
+  }
+
+@media only screen and (max-width: 500px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header, .content, .footer {
+        width: 100%;
+    }
+}
+
+  

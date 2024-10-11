@@ -1,0 +1,237 @@
+<%- include('header',{admin:admin}) %>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css"/>
+
+<!-- 
+    RTL version
+-->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.rtl.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.rtl.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/semantic.rtl.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.rtl.min.css"/>
+
+<style>
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    textarea,
+    select {
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    textarea {
+        resize: vertical;
+    }
+    
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    button:hover {
+        background-color: #218838;
+    }
+    a{
+        color: green;
+    }
+    a:hover
+    {
+        color: rgb(138, 138, 138);
+    }
+    small{
+        display: flex;
+        justify-content: center;
+        color: rgb(221, 1, 1);
+    }
+    </style>
+    
+    <div class="container">
+        <h1 class="mt-5">Add New Product</h1>
+        <form   id="form"  enctype="multipart/form-data" >
+            <% if (product_Add_errormsg) { %>
+            <small><%= product_Add_errormsg %></small>
+            <% } %>
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Product Name</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryId">Select Category:</label>
+                        <select id="categoryId" name="categoryId" class="form-control" onchange="get_subcategories()">
+                            <% Categories.forEach(category => { %>
+                            <option value="<%= category._id %>"><%= category.name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subcategory_id">Sub Category</label>
+                        <select class="form-control" id="subcategory_id" name="sub_category_Id">
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" id="price" name="price" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <input type="text" class="form-control" id="brand" name="brand">
+                    </div>
+                    <div class="form-group">
+                        <label for="images">Images</label>
+                        <input  type="file" id="images" name="images" multiple onchange="submitform()" >
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Stock</label>
+                        <input type="number" class="form-control" id="stock" name="stock">
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary" onclick="show_files(event)">Add Product</button>
+        </form>
+    </div>
+    
+    <script>
+        async function get_subcategories() {
+            console.log("fetch function start")
+
+            const categoryId = document.getElementById('categoryId').value;
+            const subcategorySelect = document.getElementById('subcategory_id');
+           
+            subcategorySelect.innerHTML = ''; // Clear previous options
+            console.log("ffetch")
+        
+                const response = await fetch(`/set_subcategories/${categoryId}`);
+                console.log("fetched")
+                console.log(response)
+                const subcategories = await response.json();
+
+                console.log(subcategories)
+                subcategories.forEach(subcategory => {
+
+                    const option = document.createElement('option');
+                    option.value = subcategory._id;
+                    option.textContent = subcategory.name;
+                    subcategorySelect.appendChild(option);
+                });
+          
+        }
+    
+        form.reset()
+ var images = [];
+ function submitform() {
+    console.log('Start'); // Ensure this log is seen
+
+    const imageInput = document.getElementById('images');
+    const files = imageInput.files;
+
+    console.log(files)
+    // Log the selected files with more details
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+    console.log(file)
+        images.push(file);
+      
+    }    
+    console.log(images)
+
+}
+
+async function show_files(event){
+    event.preventDefault()
+   console.log("start")
+    const form = document.getElementById('form');
+    let Formdata =new FormData(form)
+    images.forEach(image_File=>{
+        Formdata.append('images',image_File)
+    })
+
+ 
+    const response = await fetch("/Add_product",{
+        method :'POST',
+        body:Formdata
+    })
+    console.log("data fetched")
+  
+    const Data_Added = await  response.json()
+    if(Data_Added.success === true){
+        
+  // success notification
+  // Shorthand for:
+  // alertify.notify( message, 'success', [wait, callback]);
+  alertify.success('Success message');
+    }
+    else{
+        alert("error")
+    }
+    console.log("data :",Data_Added)
+    
+ 
+
+    if(Data_Added)
+    {
+       console.log("enter")
+       window.location.href='/products'
+    }
+    }
+
+
+</script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+<%- include('footer') %>
+
+
+
+
+
